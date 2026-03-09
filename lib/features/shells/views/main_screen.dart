@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
+import 'package:portfolio/features/contact/views/contacts_screen.dart';
 import 'package:portfolio/features/home/views/home_screen.dart';
 import 'package:portfolio/features/projects/views/projects_screen.dart';
 import 'package:portfolio/features/shells/providers/main_navigation_controller.dart';
@@ -22,6 +23,7 @@ class MainScreen extends ConsumerWidget {
       const SpotlightsScreen(),
       const ProjectsScreen(),
       const SkillsScreen(),
+      const ContactsScreen(),
     ];
 
     return MainWrapper(

@@ -43,35 +43,30 @@ class NavBar extends StatelessWidget {
               children: [
                 _NavBarItem(
                   icon: Icons.home,
-                  label: "Home",
                   index: 0,
                   isSelected: currentIndex == 0,
                   onTap: onTap,
                 ),
                 _NavBarItem(
                   icon: Icons.person,
-                  label: "Spotlight",
                   index: 1,
                   isSelected: currentIndex == 1,
                   onTap: onTap,
                 ),
                 _NavBarItem(
                   icon: FontAwesomeIcons.briefcase,
-                  label: "Project",
                   index: 2,
                   isSelected: currentIndex == 2,
                   onTap: onTap,
                 ),
                 _NavBarItem(
                   icon: Icons.code,
-                  label: "Skills",
                   index: 3,
                   isSelected: currentIndex == 3,
                   onTap: onTap,
                 ),
                 _NavBarItem(
                   icon: FontAwesomeIcons.addressCard,
-                  label: "Contact",
                   index: 4,
                   isSelected: currentIndex == 4,
                   onTap: onTap,
@@ -87,14 +82,12 @@ class NavBar extends StatelessWidget {
 
 class _NavBarItem extends StatelessWidget {
   final IconData icon;
-  final String label;
   final int index;
   final bool isSelected;
   final Function(int) onTap;
 
   const _NavBarItem({
     required this.icon,
-    required this.label,
     required this.index,
     required this.isSelected,
     required this.onTap
@@ -112,6 +105,9 @@ class _NavBarItem extends StatelessWidget {
             color: isSelected ? Color(0xff4ab3f6) : Colors.transparent,
             borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r),
           ),
+          padding: EdgeInsets.symmetric(
+            vertical: AppConstants.spacingXS.h,
+          ),
           child: Column(
             children: [
               Icon(
@@ -119,14 +115,6 @@ class _NavBarItem extends StatelessWidget {
                 size: AppConstants.fontXL.sp,
                 color: isSelected ? AppColors.textOnDark : AppColors.disable,
               ),
-              Text(
-                label,
-                style: TextStyle(
-                    fontSize: AppConstants.fontXS.sp,
-                    color: isSelected ? AppColors.textOnDark : AppColors.disable,
-                    fontWeight: .w600
-                ),
-              )
             ],
           ),
         ),
