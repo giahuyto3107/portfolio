@@ -4,8 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/home/views/home_screen.dart';
+import 'package:portfolio/features/projects/views/projects_screen.dart';
 import 'package:portfolio/features/shells/providers/main_navigation_controller.dart';
 import 'package:portfolio/features/shells/views/nav_bar.dart';
+import 'package:portfolio/features/skills/views/skills_screen.dart';
+import 'package:portfolio/features/spotlights/views/spotlights_screen.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -14,8 +17,11 @@ class MainScreen extends ConsumerWidget {
   Widget build (BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(mainNavigationControllerProvider);
 
-    List<Widget> _screens = [
+    List<Widget> screens = [
       const HomeScreen(),
+      const SpotlightsScreen(),
+      const ProjectsScreen(),
+      const SkillsScreen(),
     ];
 
     return MainWrapper(
@@ -23,7 +29,7 @@ class MainScreen extends ConsumerWidget {
         children: [
           IndexedStack(
             index: currentIndex,
-            children: _screens,
+            children: screens,
           ),
 
           Align(

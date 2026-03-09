@@ -24,11 +24,11 @@ class NavBar extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // The "Frosted" effect
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withAlpha(178),
+            color: Color(0xff07203e).withAlpha(178),
             borderRadius: BorderRadius.circular(50.sp),
             border: Border.all(
-                color: const Color(0xffE6E6E6).withAlpha(127), // Lighter border
-                width: 1.w
+              color: const Color(0xffE6E6E6).withAlpha(127), // Lighter border
+              width: 1.w
             ),
           ),
           child: Padding(
@@ -107,22 +107,28 @@ class _NavBarItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
         width: 55.w,
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              size: AppConstants.fontXL.sp,
-              color: isSelected ? AppColors.textOnLight : AppColors.disable,
-            ),
-            Text(
-              label,
-              style: TextStyle(
-                  fontSize: AppConstants.fontXS.sp,
-                  color: isSelected ? AppColors.textOnLight : AppColors.disable,
-                  fontWeight: .w600
+        child: Container(
+          decoration: BoxDecoration(
+            color: isSelected ? Color(0xff4ab3f6) : Colors.transparent,
+            borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r),
+          ),
+          child: Column(
+            children: [
+              Icon(
+                icon,
+                size: AppConstants.fontXL.sp,
+                color: isSelected ? AppColors.textOnDark : AppColors.disable,
               ),
-            )
-          ],
+              Text(
+                label,
+                style: TextStyle(
+                    fontSize: AppConstants.fontXS.sp,
+                    color: isSelected ? AppColors.textOnDark : AppColors.disable,
+                    fontWeight: .w600
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
