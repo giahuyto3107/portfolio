@@ -26,4 +26,6 @@ class AppColors {
       Color(0xff1874e3),
     ]
   );
+
+  static const Color disable = Color(0xffa5a5a5);
 }

@@ -1,36 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/router/app_routes.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/widgets/main_wrapper.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
   Widget build (BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppConstants.spacingXXXL.w,
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: AppConstants.spacingXXXL.h,),
-              Expanded(child: const _ImageContainer()),
-              SizedBox(height: AppConstants.spacingXXXL.h,),
-              const _PrimaryTitle(),
-              SizedBox(height: AppConstants.spacingL.h,),
-              const _SecondaryTitle(),
-              SizedBox(height: AppConstants.spacingXXL.h,),
-              const _ViewMyWorkButton(),
-              SizedBox(height: AppConstants.spacingXXL.h,),
-            ],
-          ),
-        )
-      )
+    return MainWrapper(
+      child: Column(
+        children: [
+          // SizedBox(height: AppConstants.spacingXXXL.h,),
+          Expanded(child: const _ImageContainer()),
+          SizedBox(height: AppConstants.spacingXXXL.h,),
+          const _PrimaryTitle(),
+          SizedBox(height: AppConstants.spacingL.h,),
+          const _SecondaryTitle(),
+          SizedBox(height: AppConstants.spacingXXL.h,),
+          const _ViewMyWorkButton(),
+        ],
+      ),
     );
   }
 }
@@ -88,35 +82,38 @@ class _ViewMyWorkButton extends StatelessWidget {
 
   @override
   Widget build (BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: AppColors.horizontalGradientButton,
-        borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r)
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: AppConstants.spacingXL.w,
-        vertical: AppConstants.spacingM.h,
-      ),
-      child: Row(
-        mainAxisAlignment: .center,
-        mainAxisSize: .min,
-        children: [
-          Icon(
-            Icons.arrow_forward,
-            color: AppColors.textOnDark,
-            size: AppConstants.fontM.sp,
-            weight: AppConstants.borderMedium,
-          ),
-          SizedBox(width: AppConstants.spacingS.w,),
-          Text(
-            AppStrings.viewMyWork,
-            style: TextStyle(
-              fontSize: AppConstants.fontS.sp,
-              fontWeight: .w500,
-              color: AppColors.textOnDark
+    return GestureDetector(
+      onTap: () => context.go(AppRoutes.mainPath),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: AppColors.horizontalGradientButton,
+          borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r)
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppConstants.spacingXL.w,
+          vertical: AppConstants.spacingM.h,
+        ),
+        child: Row(
+          mainAxisAlignment: .center,
+          mainAxisSize: .min,
+          children: [
+            Icon(
+              Icons.arrow_forward,
+              color: AppColors.textOnDark,
+              size: AppConstants.fontM.sp,
+              weight: AppConstants.borderMedium,
             ),
-          )
-        ],
+            SizedBox(width: AppConstants.spacingS.w,),
+            Text(
+              AppStrings.viewMyWork,
+              style: TextStyle(
+                fontSize: AppConstants.fontS.sp,
+                fontWeight: .w500,
+                color: AppColors.textOnDark
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

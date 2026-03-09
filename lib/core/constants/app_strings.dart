@@ -5,4 +5,6 @@ class AppStrings {
   static const String secondaryAppTitle = 'Passionate about building modern apps with clean Ul smooth animations, and seamless performance.';
 
   static const String viewMyWork = "View My Work";
+
+  static const String contactMe = "Contact me";
 }
