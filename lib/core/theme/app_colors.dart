@@ -9,6 +9,9 @@ class AppColors {
   static const Color textOnLight = Colors.black;
   static const Color secondaryText = Color(0xffBCB6B6);
 
+  static const Color skillBackgroundColor = Color(0xff09192B);
+  static const Color skillBorderColor = Color(0xff132544);
+
   static const LinearGradient horizontalGradientButton = LinearGradient(
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
