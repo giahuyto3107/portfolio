@@ -28,7 +28,7 @@ class _HomeContent extends StatelessWidget {
       children: [
         const _OwnerInformation(),
         SizedBox(height: AppConstants.spacingL.h,),
-        Expanded(child: const _SocialAccountsSection()),
+        const _SocialAccountsSection(),
       ],
     );
   }
@@ -43,12 +43,13 @@ class _OwnerInformation extends StatelessWidget {
 
     return Column(
       children: [
-        Container(
-          height: size.w,
-          width: size.w,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r)
+        ClipRRect(
+          borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r),
+          child: Image.asset(
+            'assets/portfolio_avt.png',
+            fit: BoxFit.cover,
+            height: size.w,
+            width: size.w,
           ),
         ),
 
@@ -61,7 +62,7 @@ class _OwnerInformation extends StatelessWidget {
         ),
 
         _OwnerTitle(
-            title: 'Tô Gia Huy',
+            title: 'Flutter Developer | Android Developer',
             size: AppConstants.fontS.sp,
             weight: .w400,
             color: AppColors.secondaryText
@@ -141,6 +142,7 @@ class _SocialAccountsSection extends StatelessWidget {
           vertical: AppConstants.spacingL.h,
         ),
         child: Column(
+          mainAxisSize: .min,
           children: [
             _ContactMeSection(),
             SizedBox(height: AppConstants.spacingXL.h,),
