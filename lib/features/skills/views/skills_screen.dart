@@ -29,6 +29,7 @@ class _Content extends StatelessWidget {
     return Column(
       crossAxisAlignment: .center,
       children: [
+        SizedBox(height: AppConstants.spacingS.h,),
         HighLightTitle(
           primaryText: "My Skills",
           secondaryText: "Technologies | work with",

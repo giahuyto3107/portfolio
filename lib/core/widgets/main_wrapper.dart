@@ -10,15 +10,19 @@ class MainWrapper extends StatelessWidget {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         bottom: false,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppConstants.spacingL.w,
-            // vertical: AppConstants.spacingXL.h,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.backgroundColor
           ),
-          child: child,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppConstants.spacingL.w,
+              // vertical: AppConstants.spacingXL.h,
+            ),
+            child: child,
+          ),
         ),
       )
     );

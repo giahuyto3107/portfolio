@@ -26,6 +26,7 @@ class _HomeContent extends StatelessWidget {
   Widget build (BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: AppConstants.spacingS.h,),
         const _OwnerInformation(),
         SizedBox(height: AppConstants.spacingL.h,),
         const _SocialAccountsSection(),
