@@ -8,6 +8,7 @@ class AppColors {
   static const Color textOnDark = Colors.white;
   static const Color textOnLight = Colors.black;
   static const Color secondaryText = Color(0xffBCB6B6);
+  static const Color lighterTextColor = Color(0xff687483);
 
   static const Color skillBackgroundColor = Color(0xff09192B);
   static const Color skillBorderColor = Color(0xff132544);
