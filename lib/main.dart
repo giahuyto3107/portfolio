@@ -7,14 +7,17 @@ import 'package:portfolio/core/router/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
 
   runApp(
     ProviderScope(
-      child: DevicePreview(
-        enabled: !kReleaseMode,
-          builder: (context) => const MyApp()
-      )
-    )
+      child: kReleaseMode
+          ? const MyApp()
+          : DevicePreview(
+              enabled: true,
+              builder: (context) => const MyApp(),
+            ),
+    ),
   );
 }
 
@@ -28,21 +31,21 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
+      useInheritedMediaQuery: true,
       builder: (context, child) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: appRouter,
+          locale: kReleaseMode ? null : DevicePreview.locale(context),
+          builder: kReleaseMode ? null : DevicePreview.appBuilder,
           themeMode: ThemeMode.light,
           theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white, // Change 'white' to any color you want
+            scaffoldBackgroundColor: Colors.white,
             brightness: Brightness.light,
-            // primaryColor: AppColors.primaryColor,
-            // textTheme: const TextTheme(bodyMedium: TextStyle(color: AppColors.textOnLight)),
-            // extensions: [lightSelection, lightSurfaces, lightBackgroundGradient],
             useMaterial3: true,
           ),
         );
-      }
+      },
     );
   }
 }
