@@ -43,7 +43,7 @@ class HighLightTitle extends StatelessWidget {
             color: AppColors.secondaryText
           ),
         ),
-        SizedBox(height: AppConstants.spacingXL.h,),
+        secondaryText == "" ? Container() : SizedBox(height: AppConstants.spacingXL.h,),
       ],
     );
   }
