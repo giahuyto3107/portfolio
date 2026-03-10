@@ -20,7 +20,7 @@ class HighLightTitle extends StatelessWidget {
         Text(
           primaryText,
           style: TextStyle(
-            fontSize: AppConstants.fontL.sp,
+            fontSize: AppConstants.fontXL.sp,
             fontWeight: .w600,
             color: AppColors.textOnDark
           ),
@@ -34,13 +34,13 @@ class HighLightTitle extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r)
           ),
         ),
-        SizedBox(height: AppConstants.spacingS.h,),
+        SizedBox(height: AppConstants.spacingM.h,),
         secondaryText == "" ? Container() : Text(
           secondaryText,
           style: TextStyle(
-            fontSize: AppConstants.fontS.sp,
+            fontSize: AppConstants.fontXS.sp,
             fontWeight: .w400,
-            color: AppColors.textOnDark
+            color: AppColors.secondaryText
           ),
         ),
         SizedBox(height: AppConstants.spacingXL.h,),

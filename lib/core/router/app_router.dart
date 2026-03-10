@@ -27,7 +27,7 @@ final GoRouter appRouter = GoRouter(
       ),
 
       // GoRoute(
-      //   path: AppRoutes.spotlightsPath,
+      //   path: AppRoutes.aboutMeScreen,
       //   name: 'spotlight_screen',
       //   builder: (context, state) => const SkillsScreen(),
       // ),

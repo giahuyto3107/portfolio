@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
+import 'package:portfolio/features/about_me/views/about_me_screen.dart';
 import 'package:portfolio/features/contact/views/contacts_screen.dart';
 import 'package:portfolio/features/home/views/home_screen.dart';
 import 'package:portfolio/features/projects/views/projects_screen.dart';
 import 'package:portfolio/features/shells/providers/main_navigation_controller.dart';
 import 'package:portfolio/features/shells/views/nav_bar.dart';
 import 'package:portfolio/features/skills/views/skills_screen.dart';
-import 'package:portfolio/features/spotlights/views/spotlights_screen.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -20,7 +20,7 @@ class MainScreen extends ConsumerWidget {
 
     List<Widget> screens = [
       const HomeScreen(),
-      const SpotlightsScreen(),
+      const AboutMeScreen(),
       const ProjectsScreen(),
       const SkillsScreen(),
       const ContactsScreen(),

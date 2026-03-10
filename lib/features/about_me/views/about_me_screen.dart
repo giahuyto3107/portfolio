@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 
-class SpotlightsScreen extends StatelessWidget {
-  const SpotlightsScreen({super.key});
+class AboutMeScreen extends StatelessWidget {
+  const AboutMeScreen({super.key});
 
   @override
   Widget build (BuildContext context) {
