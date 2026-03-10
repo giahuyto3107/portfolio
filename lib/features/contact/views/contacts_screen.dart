@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
-import 'package:portfolio/core/router/app_routes.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/contact/data/models/contact.dart';
+import 'package:portfolio/features/shells/providers/main_navigation_controller.dart';
 
 class ContactsScreen extends StatelessWidget {
   const ContactsScreen({super.key});
@@ -245,13 +245,14 @@ class _FieldTextField extends StatelessWidget {
   }
 }
 
-class _ViewMyWorkButton extends StatelessWidget {
+class _ViewMyWorkButton extends ConsumerWidget {
   const _ViewMyWorkButton();
 
   @override
-  Widget build (BuildContext context) {
+  Widget build (BuildContext context, WidgetRef ref) {
+
     return GestureDetector(
-      onTap: () => context.push(AppRoutes.projectsPath),
+      onTap: () => ref.read(mainNavigationControllerProvider.notifier).setIndex(2),
       child: Container(
         width: 250.w,
         decoration: BoxDecoration(

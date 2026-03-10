@@ -26,17 +26,17 @@ final GoRouter appRouter = GoRouter(
         builder: (context, state) => const HomeScreen(),
       ),
 
-      // GoRoute(
-      //   path: AppRoutes.aboutMeScreen,
-      //   name: 'spotlight_screen',
-      //   builder: (context, state) => const SkillsScreen(),
-      // ),
+      GoRoute(
+        path: AppRoutes.aboutMePath,
+        name: 'spotlight_screen',
+        builder: (context, state) => const SkillsScreen(),
+      ),
 
-      // GoRoute(
-      //   path: AppRoutes.projectsPath,
-      //   name: 'projects_screen',
-      //   builder: (context, state) => const SkillsScreen(),
-      // ),
+      GoRoute(
+        path: AppRoutes.projectsPath,
+        name: 'projects_screen',
+        builder: (context, state) => const SkillsScreen(),
+      ),
 
       GoRoute(
         path: AppRoutes.skillsPath,
