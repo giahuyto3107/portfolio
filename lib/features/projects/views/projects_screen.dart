@@ -25,44 +25,49 @@ class _Content extends StatelessWidget {
     List<Project> projects = [
       Project(
         title: 'Nutripal',
-        description: 'AI',
-        techStack: ['Flutter', 'Api Integration', 'UI/UX', 'FastAPI', 'MySQL'],
+        description: 'AI-Powered Nutrition & Fitness App',
+        techStack: ['Flutter', 'Api Integration', 'UI/UX', 'FastAPI', 'MySQL', 'Firebase'],
         onCodeTap: () => {},
         onDemoTap: () => {},
+        coverImagePath: '',
       ),
       Project(
         title: 'Tiktok-clone',
-        description: 'Tiktok-clone app',
+        description: 'Short-Video Social Media Application',
         techStack: ['Jetpack compose', 'Api Integration', 'FastAPI', 'MySQL', 'Firebase'],
         onCodeTap: () => {},
         onDemoTap: () => {},
+        coverImagePath: 'assets/tiktok.png'
       ),
     ];
 
     return SingleChildScrollView(
       child: Column(
+        mainAxisSize: .max,
         children: [
           SizedBox(height: AppConstants.spacingS.h,),
           HighLightTitle(
             primaryText: 'My Projects',
             secondaryText: 'Showcasing my latest works and innovations',
           ),
-      
+
           ListView.separated(
-              shrinkWrap: true,
-              itemCount: projects.length,
-              physics: const NeverScrollableScrollPhysics(),
-              separatorBuilder: (context, index) {
-                return SizedBox(
-                  height: AppConstants.spacingXL.h,
-                );
-              },
-              itemBuilder: (context, index) {
-                return _ProjectContainer(
-                  project: projects[index],
-                );
-              }
-          )
+            shrinkWrap: true,
+            itemCount: projects.length,
+            physics: const NeverScrollableScrollPhysics(),
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: AppConstants.spacingXL.h,
+              );
+            },
+            itemBuilder: (context, index) {
+              return _ProjectContainer(
+                project: projects[index],
+              );
+            }
+          ),
+
+          SizedBox(height: AppConstants.spacingXXXL.h,),
         ],
       ),
     );
@@ -77,7 +82,9 @@ class _ProjectContainer extends StatelessWidget {
   Widget build (BuildContext context) {
     return Column(
       children: [
-        _ProjectUpperSection(),
+        _ProjectUpperSection(
+          coverImagePath: project.coverImagePath,
+        ),
         _ProjectLowerSection(
           project: project,
         ),
@@ -87,17 +94,33 @@ class _ProjectContainer extends StatelessWidget {
 }
 
 class _ProjectUpperSection extends StatelessWidget {
-  const _ProjectUpperSection();
+  final String coverImagePath;
+
+  const _ProjectUpperSection({
+    required this.coverImagePath,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 150.h,
+    return coverImagePath == '' ? Container(
+      height: 125.h,
       
       decoration: BoxDecoration(
         gradient: AppColors.horizontalGradientButton,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(AppConstants.radiusL.r)
+        ),
+      ),
+    ) : SizedBox(
+      height: 125.h,
+      width: double.infinity,
+      child: ClipRRect(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppConstants.radiusL.r)
+        ),
+        child: Image.asset(
+          coverImagePath,
+          fit: BoxFit.contain,
         ),
       ),
     );
@@ -118,39 +141,42 @@ class _ProjectLowerSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: Color(0xff152f50),
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(AppConstants.radiusL.r)
+            bottom: Radius.circular(AppConstants.radiusL.r)
         )
       ),
       padding: EdgeInsets.symmetric(
         horizontal: AppConstants.spacingM.w,
-        vertical: AppConstants.spacingS.h,
+        vertical: AppConstants.spacingM.h,
       ),
       child: Column(
-        crossAxisAlignment: .start,
-        children: [
-          Text(
-            project.title,
-            style: TextStyle(
-              fontSize: AppConstants.fontM.sp,
-              fontWeight: .w500,
-              color: AppColors.textOnDark
+          crossAxisAlignment: .start,
+          children: [
+            Text(
+              project.title,
+              style: TextStyle(
+                fontSize: AppConstants.fontM.sp,
+                fontWeight: .w500,
+                color: AppColors.textOnDark
+              ),
             ),
-          ),
-      
-          Text(
-            project.description,
-            style: TextStyle(
-              fontSize: AppConstants.fontS.sp,
-              fontWeight: .w400,
-              color: AppColors.disable
+            SizedBox(height: AppConstants.spacingXS.h,),
+            Text(
+              project.description,
+              style: TextStyle(
+                fontSize: AppConstants.fontS.sp,
+                fontWeight: .w400,
+                color: AppColors.disable
+              ),
             ),
-          ),
-      
-          _TechStackSection(
+            SizedBox(height: AppConstants.spacingS.h,),
+            _TechStackSection(
               skills: project.techStack,
-          ),
-        ],
-      ),
+            ),
+
+            SizedBox(height: AppConstants.spacingM.h,),
+            const _ActionButtons(),
+          ],
+        ),
     );
   }
 }
@@ -176,10 +202,11 @@ class _TechStackSection extends StatelessWidget {
 
 class _TechStackContainer extends StatelessWidget {
   final String skill;
+
   const _TechStackContainer({required this.skill});
 
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Color(0xff0e67d7),
@@ -196,6 +223,74 @@ class _TechStackContainer extends StatelessWidget {
           fontWeight: .w500,
           color: AppColors.textOnDark
         ),
+      ),
+    );
+  }
+}
+
+class _ActionButtons extends StatelessWidget {
+  const _ActionButtons();
+
+  @override
+  Widget build (BuildContext context) {
+    return Row(
+      children: [
+        _ActionContainer(
+          bgColor: Color(0xff24242B),
+          icon: Icons.code,
+          label: 'Code'
+        ),
+        SizedBox(width: AppConstants.spacingM.w,),
+        _ActionContainer(
+            bgColor: Color(0xff0e67d7),
+            icon: Icons.play_arrow,
+            label: 'Demo'
+        ),
+      ],
+    );
+  }
+}
+
+class _ActionContainer extends StatelessWidget {
+  final Color bgColor;
+  final IconData icon;
+  final String label;
+
+  const _ActionContainer({
+    required this.bgColor,
+    required this.icon,
+    required this.label
+  });
+
+  @override
+  Widget build (BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: .circular(AppConstants.radiusM.r)
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppConstants.spacingM.w,
+        vertical: AppConstants.spacingS.h,
+      ),
+      child: Row(
+        mainAxisAlignment: .spaceAround,
+        children: [
+          Icon(
+            icon,
+            color: AppColors.textOnDark,
+            size: AppConstants.fontL.sp,
+          ),
+          SizedBox(width: AppConstants.spacingXS.w,),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: AppConstants.fontXS.sp,
+              fontWeight: .w500,
+              color: AppColors.textOnDark
+            ),
+          )
+        ],
       ),
     );
   }

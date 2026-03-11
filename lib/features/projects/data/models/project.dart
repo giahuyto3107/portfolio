@@ -1,4 +1,5 @@
 class Project {
+  final String coverImagePath;
   final String title;
   final String description;
   final List<String> techStack;
@@ -6,6 +7,7 @@ class Project {
   final Function() onDemoTap;
 
   Project({
+    required this.coverImagePath,
     required this.title,
     required this.description,
     required this.techStack,
