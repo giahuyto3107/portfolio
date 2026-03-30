@@ -5,6 +5,7 @@ import 'package:portfolio/core/theme/app_colors.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/projects/data/models/project.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
@@ -32,12 +33,34 @@ class _Content extends StatelessWidget {
         coverImagePath: '',
       ),
       Project(
+        coverImagePath: 'assets/automatic_demonstration.png',
+        title: 'Automatic demonstration',
+        description: 'Hands-free Flutter mobile app for location-triggered multilingual audio guides for street food discovery.',
+        techStack: [
+          'Flutter (Dart 3)',
+          'Riverpod',
+          'Vietmap GL',
+          'Just Audio',
+          'Geolocator',
+          'Dio',
+          'Intl'
+        ],
+        onCodeTap: () =>
+          launchUrl(Uri.parse('https://github.com/giahuyto3107/automatic_demonstration.git')),
+        onDemoTap: () => {}
+      ),
+      Project(
         title: 'Tiktok-clone',
-        description: 'Short-Video Social Media Application',
+        description: 'Android app for a short-video social media application.',
         techStack: ['Jetpack compose', 'Api Integration', 'FastAPI', 'MySQL', 'Firebase'],
-        onCodeTap: () => {},
         onDemoTap: () => {},
-        coverImagePath: 'assets/tiktok.png'
+        coverImagePath: 'assets/tiktok.png',
+        isCover: false,
+        subLinks:
+          SubLinks(
+            feLink: 'https://github.com/giahuyto3107/Tiktok-clone.git',
+            beLink: 'https://github.com/giahuyto3107/tiktok_clone_backend.git'
+          ),
       ),
     ];
 
@@ -83,7 +106,7 @@ class _ProjectContainer extends StatelessWidget {
     return Column(
       children: [
         _ProjectUpperSection(
-          coverImagePath: project.coverImagePath,
+          project: project,
         ),
         _ProjectLowerSection(
           project: project,
@@ -94,17 +117,16 @@ class _ProjectContainer extends StatelessWidget {
 }
 
 class _ProjectUpperSection extends StatelessWidget {
-  final String coverImagePath;
+  final Project project;
 
   const _ProjectUpperSection({
-    required this.coverImagePath,
+    required this.project,
   });
 
   @override
   Widget build(BuildContext context) {
-    return coverImagePath == '' ? Container(
+    return project.coverImagePath == '' ? Container(
       height: 125.h,
-      
       decoration: BoxDecoration(
         gradient: AppColors.horizontalGradientButton,
         borderRadius: BorderRadius.vertical(
@@ -119,8 +141,8 @@ class _ProjectUpperSection extends StatelessWidget {
           top: Radius.circular(AppConstants.radiusL.r)
         ),
         child: Image.asset(
-          coverImagePath,
-          fit: BoxFit.contain,
+          project.coverImagePath,
+          fit: project.isCover ? .cover : .contain,
         ),
       ),
     );
@@ -136,6 +158,8 @@ class _ProjectLowerSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool showCodeTap = project.onCodeTap != null;
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -149,34 +173,40 @@ class _ProjectLowerSection extends StatelessWidget {
         vertical: AppConstants.spacingM.h,
       ),
       child: Column(
-          crossAxisAlignment: .start,
-          children: [
-            Text(
-              project.title,
-              style: TextStyle(
-                fontSize: AppConstants.fontM.sp,
-                fontWeight: .w500,
-                color: AppColors.textOnDark
-              ),
+        crossAxisAlignment: .start,
+        children: [
+          Text(
+            project.title,
+            style: TextStyle(
+              fontSize: AppConstants.fontM.sp,
+              fontWeight: .w500,
+              color: AppColors.textOnDark
             ),
-            SizedBox(height: AppConstants.spacingXS.h,),
-            Text(
-              project.description,
-              style: TextStyle(
-                fontSize: AppConstants.fontS.sp,
-                fontWeight: .w400,
-                color: AppColors.disable
-              ),
+          ),
+          SizedBox(height: AppConstants.spacingXS.h,),
+          Text(
+            project.description,
+            style: TextStyle(
+              fontSize: AppConstants.fontS.sp,
+              fontWeight: .w400,
+              color: AppColors.disable
             ),
-            SizedBox(height: AppConstants.spacingS.h,),
-            _TechStackSection(
-              skills: project.techStack,
-            ),
+          ),
+          SizedBox(height: AppConstants.spacingS.h,),
+          _TechStackSection(
+            skills: project.techStack,
+          ),
 
-            SizedBox(height: AppConstants.spacingM.h,),
-            const _ActionButtons(),
-          ],
-        ),
+          SizedBox(height: AppConstants.spacingM.h,),
+          _ActionButtons(
+            project: project,
+            showCodeTap: showCodeTap,
+          ),
+
+          showCodeTap ? Container()
+              : _SubCodeRow(subLinks: project.subLinks!,)
+        ],
+      ),
     );
   }
 }
@@ -229,22 +259,34 @@ class _TechStackContainer extends StatelessWidget {
 }
 
 class _ActionButtons extends StatelessWidget {
-  const _ActionButtons();
+  final Project project;
+  final bool showCodeTap;
+
+  const _ActionButtons({
+    required this.project,
+    this.showCodeTap = true
+  });
 
   @override
   Widget build (BuildContext context) {
     return Row(
       children: [
-        _ActionContainer(
-          bgColor: Color(0xff24242B),
-          icon: Icons.code,
-          label: 'Code'
-        ),
-        SizedBox(width: AppConstants.spacingM.w,),
-        _ActionContainer(
-            bgColor: Color(0xff0e67d7),
+        showCodeTap ? GestureDetector(
+          onTap: () => project.onCodeTap!(),
+          child: _ActionContainer(
+            bgColor: Color(0xff24242B),
+            icon: Icons.code,
+            label: 'Code'
+          ),
+        ) : Container(),
+        showCodeTap ? SizedBox(width: AppConstants.spacingM.w,) : Container(),
+        GestureDetector(
+          onTap: () => project.onDemoTap(),
+          child: _ActionContainer(
+            bgColor: Color(0xff10B924),
             icon: Icons.play_arrow,
             label: 'Demo'
+          ),
         ),
       ],
     );
@@ -291,6 +333,73 @@ class _ActionContainer extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _SubCodeRow extends StatelessWidget {
+  final SubLinks subLinks;
+  const _SubCodeRow({required this.subLinks});
+
+  @override
+  Widget build (BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: AppConstants.spacingM.h,),
+
+        Row(
+          children: [
+            _SubCodeLine(
+              label: "Mobile's repo",
+              link: subLinks.feLink,
+              color: Color(0xfff97015),
+            ),
+            SizedBox(width: AppConstants.spacingM.w),
+            _SubCodeLine(
+              label: "Backend's repo",
+              link: subLinks.beLink,
+              color: Color(0xff24242B),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _SubCodeLine extends StatelessWidget {
+  final String label;
+  final String link;
+  final Color color;
+
+  const _SubCodeLine({
+    required this.label,
+    required this.link,
+    required this.color,
+  });
+
+  @override
+  Widget build (BuildContext context) {
+    return GestureDetector(
+      onTap: () => launchUrl(Uri.parse(link)),
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: .circular(AppConstants.radiusM.r)
+        ),
+        padding: EdgeInsets.symmetric(
+        horizontal: AppConstants.spacingM.w,
+        vertical: AppConstants.spacingS.h,
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: AppConstants.fontXS.sp,
+            fontWeight: .w500,
+            color: AppColors.textOnDark
+          ),
+        ),
       ),
     );
   }
