@@ -5,6 +5,9 @@ import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
+import 'package:portfolio/core/widgets/project_container.dart';
+import 'package:portfolio/features/projects/data/models/project.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutMeScreen extends StatelessWidget {
   const AboutMeScreen({super.key});
@@ -22,16 +25,36 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build (BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: AppConstants.spacingS.h,),
-        HighLightTitle(
-          primaryText: "About Me",
-          secondaryText: "Passionate Mobile Developer",
-        ),
-
-        const _SelfDescriptionContainer()
+    final webPortFolio = Project(
+      coverImagePath: "assets/web_portfolio.png",
+      title: 'Welcome to My Portfolio Website!',
+      description: "Here I showcase my work as a mobile developer from clean UI designs to fully functional cross-platform apps. Take a look at my projects and see how I bring ideas to life with Flutter/Dart and Jetpack Compose.",
+      techStack: [
+        'Flutter',
+        'UI/UX',
       ],
+      onDemoTap: () => {},
+      onCodeTap: () => launchUrl(Uri.parse('https://github.com/giahuyto3107/portfolio_web.git')),
+    );
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: AppConstants.spacingS.h,),
+          HighLightTitle(
+            primaryText: "About Me",
+            secondaryText: "Passionate Mobile Developer",
+          ),
+      
+          const _SelfDescriptionContainer(),
+          SizedBox(height: AppConstants.spacingXXXL.h,),
+          const _PortfolioSpotLight(),
+          ProjectContainer(
+            project: webPortFolio
+          ),
+          SizedBox(height: AppConstants.spacingNavigationBar.h,),
+        ],
+      ),
     );
   }
 }
@@ -158,14 +181,8 @@ class _PortfolioSpotLight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HighLightTitle(
-          primaryText: 'Portfolio Spotlight',
-        ),
-
-
-      ],
+    return HighLightTitle(
+      primaryText: 'Portfolio Spotlight',
     );
   }
 }
