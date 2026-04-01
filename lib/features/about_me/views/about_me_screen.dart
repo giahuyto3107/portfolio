@@ -34,18 +34,21 @@ class _Content extends StatelessWidget {
         'UI/UX',
       ],
       onDemoTap: () => {},
-      onCodeTap: () => launchUrl(Uri.parse('https://github.com/giahuyto3107/portfolio_web.git')),
+      onCodeTap: () => launchUrl(
+        Uri.parse('https://github.com/giahuyto3107/portfolio_web.git')
+      ),
     );
 
     return SingleChildScrollView(
       child: Column(
+        mainAxisSize: .max,
         children: [
           SizedBox(height: AppConstants.spacingS.h,),
           HighLightTitle(
             primaryText: "About Me",
             secondaryText: "Passionate Mobile Developer",
           ),
-      
+
           const _SelfDescriptionContainer(),
           SizedBox(height: AppConstants.spacingXXXL.h,),
           const _PortfolioSpotLight(),

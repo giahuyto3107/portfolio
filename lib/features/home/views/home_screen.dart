@@ -47,7 +47,7 @@ class _OwnerInformation extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r),
           child: Image.asset(
-            'assets/portfolio_avt.png',
+            'assets/avatar.jpg',
             fit: BoxFit.cover,
             height: size.w,
             width: size.w,
