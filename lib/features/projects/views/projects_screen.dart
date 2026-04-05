@@ -56,11 +56,10 @@ class _Content extends StatelessWidget {
         onDemoTap: () => {},
         coverImagePath: 'assets/tiktok.png',
         isCover: false,
-        subLinks:
-          SubLinks(
-            feLink: 'https://github.com/giahuyto3107/Tiktok-clone.git',
-            beLink: 'https://github.com/giahuyto3107/tiktok_clone_backend.git'
-          ),
+        subLinks: {
+          "Mobile's repo": 'https://github.com/giahuyto3107/Tiktok-clone.git',
+          "Backend's repo": 'https://github.com/giahuyto3107/tiktok_clone_backend.git'
+        }
       ),
     ];
 
