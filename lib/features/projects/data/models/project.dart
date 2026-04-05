@@ -1,22 +1,12 @@
-class SubLinks {
-  final String feLink;
-  final String beLink;
-
-  const SubLinks({
-    required this.feLink,
-    required this.beLink
-  });
-}
-
 class Project {
   final String coverImagePath;
   final String title;
   final String description;
   final bool isCover;
-  final SubLinks? subLinks;
+  final Map<String, String>? subLinks;
   final List<String> techStack;
   final Function()? onCodeTap;
-  final Function() onDemoTap;
+  final Function()? onDemoTap;
 
   Project({
     this.isCover = true,
@@ -26,6 +16,6 @@ class Project {
     required this.description,
     required this.techStack,
     this.onCodeTap,
-    required this.onDemoTap
+    this.onDemoTap
   });
 }

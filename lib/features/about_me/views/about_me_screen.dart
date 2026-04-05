@@ -28,7 +28,10 @@ class _Content extends StatelessWidget {
     final webPortFolio = Project(
       coverImagePath: "assets/web_portfolio.png",
       title: 'Welcome to My Portfolio Website!',
-      description: "Here I showcase my work as a mobile developer from clean UI designs to fully functional cross-platform apps. Take a look at my projects and see how I bring ideas to life with Flutter/Dart and Jetpack Compose.",
+      description: "Here I showcase my work as a mobile developer"
+        " from clean UI designs to fully functional cross-platform apps."
+        " Take a look at my projects and see how I bring ideas to life"
+        " with Flutter/Dart and Jetpack Compose.",
       techStack: [
         'Flutter',
         'UI/UX',
@@ -37,6 +40,31 @@ class _Content extends StatelessWidget {
       onCodeTap: () => launchUrl(
         Uri.parse('https://github.com/giahuyto3107/portfolio_web.git')
       ),
+    );
+
+    final workExperience = Project(
+      coverImagePath: "assets/la_chan_xanh.png",
+      title: 'La Chan Xanh',
+      description: "As a Developer at LA CHAN XANH, "
+        "I spearheaded the end-to-end development of"
+        " a cross-platform educational application using Flutter, "
+        "contributing to approximately 40% of the total feature implementation"
+        " and UI design. I engineered responsive layouts and fluid animations to"
+        " ensure a seamless, high-performance user experience across diverse "
+        "mobile devices while integrating RESTful APIs to manage dynamic lesson content, "
+        "user profiles, and complex minigame systems. My role involved "
+        "architecting critical application modules, including dedicated dual-mode"
+        " interfaces for children and adults and secure authentication flows,"
+        " ultimately driving the project to a successful launch on the Google Play Store "
+          "with more than 500 downloads.",
+      techStack: [
+        'Flutter',
+        'UI/UX'
+      ],
+      subLinks: {
+        "App Store": "https://apps.apple.com/vn/app/l%C3%A1-ch%E1%BA%AFn-xanh/id6757321927?l=vi",
+        "Google Play": "https://play.google.com/store/apps/details?id=lab.icip.lachanxanh"
+      }
     );
 
     return SingleChildScrollView(
@@ -51,10 +79,18 @@ class _Content extends StatelessWidget {
 
           const _SelfDescriptionContainer(),
           SizedBox(height: AppConstants.spacingXXXL.h,),
+
           const _PortfolioSpotLight(),
           ProjectContainer(
             project: webPortFolio
           ),
+
+          SizedBox(height: AppConstants.spacingXXXL.h,),
+          const _WorkExperienceSpotLight(),
+          ProjectContainer(
+            project: workExperience
+          ),
+
           SizedBox(height: AppConstants.spacingNavigationBar.h,),
         ],
       ),
@@ -175,6 +211,17 @@ class _SkillsContainer extends StatelessWidget {
           color: AppColors.textOnDark
         )
       ),
+    );
+  }
+}
+
+class _WorkExperienceSpotLight extends StatelessWidget {
+  const _WorkExperienceSpotLight();
+
+  @override
+  Widget build(BuildContext context) {
+    return HighLightTitle(
+      primaryText: 'Work Experience',
     );
   }
 }

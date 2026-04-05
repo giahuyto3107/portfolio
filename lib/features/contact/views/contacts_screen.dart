@@ -230,6 +230,10 @@ class _FieldTextField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         hintText: hint,
+          hintStyle: TextStyle(
+            color: AppColors.secondaryText, // Or Colors.grey[400] if secondaryText is still too dark
+            fontSize: AppConstants.fontS.sp,
+          ),
         fillColor: Color(0xff1e1d23),
         filled: true,
         contentPadding: EdgeInsets.all(AppConstants.spacingM.r),
