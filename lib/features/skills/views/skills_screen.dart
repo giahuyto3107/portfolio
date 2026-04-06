@@ -73,7 +73,7 @@ class _SkillsSection extends StatelessWidget {
       Skill(
         percentage: 0.70,
         icon: FontAwesomeIcons.fire,
-        label: 'Flutter',
+        label: 'Firebase',
         color: Color(0xfffbb142),
       ),
       Skill(

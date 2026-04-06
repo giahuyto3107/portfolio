@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/constants.dart';
 import 'package:portfolio/core/theme/theme.dart';
+import 'package:portfolio/core/utils/ui_helpers.dart';
 import 'package:portfolio/features/projects/data/models/project.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,19 +40,22 @@ class _ProjectUpperSection extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppColors.horizontalGradientButton,
         borderRadius: BorderRadius.vertical(
-            top: Radius.circular(AppConstants.radiusL.r)
+          top: Radius.circular(AppConstants.radiusL.r)
         ),
       ),
     ) : SizedBox(
       height: 125.h,
       width: double.infinity,
-      child: ClipRRect(
-        borderRadius: BorderRadius.vertical(
+      child: GestureDetector(
+        onTap: () => UIHelpers.showImageZoom(context, project.coverImagePath),
+        child: ClipRRect(
+          borderRadius: BorderRadius.vertical(
             top: Radius.circular(AppConstants.radiusL.r)
-        ),
-        child: Image.asset(
-          project.coverImagePath,
-          fit: project.isCover ? .cover : .contain,
+          ),
+          child: Image.asset(
+            project.coverImagePath,
+            fit: project.isCover ? .cover : .contain,
+          ),
         ),
       ),
     );

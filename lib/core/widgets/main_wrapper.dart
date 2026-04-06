@@ -17,7 +17,7 @@ class MainWrapper extends StatelessWidget {
           padding: EdgeInsets.only(
             left: AppConstants.spacingL.w,
             right: AppConstants.spacingL.w,
-            top: AppConstants.spacingM.h,
+            // top: AppConstants.spacingM.h,
           ),
           child: child,
         ),

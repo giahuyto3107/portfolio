@@ -92,12 +92,12 @@ class _ContactsContent extends StatelessWidget {
             }
           ),
       
-          SizedBox(height: AppConstants.spacingL.h,),
-          const _SendMessageSection(),
-          SizedBox(height: AppConstants.spacingM.h,),
-          const _ViewMyWorkButton(),
-          SizedBox(height: AppConstants.spacingXXL.h,),
-          SizedBox(height: AppConstants.spacingXXL.h,),
+          // SizedBox(height: AppConstants.spacingL.h,),
+          // const _SendMessageSection(),
+          // SizedBox(height: AppConstants.spacingM.h,),
+          // const _ViewMyWorkButton(),
+          // SizedBox(height: AppConstants.spacingXXL.h,),
+          SizedBox(height: AppConstants.spacingNavigationBar.h,),
         ],
       ),
     );

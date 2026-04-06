@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/ui_helpers.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/home/data/models/social_account.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,13 +45,16 @@ class _OwnerInformation extends StatelessWidget {
 
     return Column(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r),
-          child: Image.asset(
-            'assets/avatar.jpg',
-            fit: BoxFit.cover,
-            height: size.w,
-            width: size.w,
+        GestureDetector(
+          onTap: () => UIHelpers.showImageZoom(context, 'assets/avatar.jpg', isCircular: true),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r),
+            child: Image.asset(
+              'assets/avatar.jpg',
+              fit: BoxFit.cover,
+              height: size.w,
+              width: size.w,
+            ),
           ),
         ),
 
