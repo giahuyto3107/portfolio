@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/ui_helpers.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/core/widgets/project_container.dart';
@@ -77,6 +78,7 @@ class _Content extends StatelessWidget {
             secondaryText: "Passionate Mobile Developer",
           ),
 
+          const _ImageSection(),
           const _SelfDescriptionContainer(),
           SizedBox(height: AppConstants.spacingXXXL.h,),
 
@@ -93,6 +95,31 @@ class _Content extends StatelessWidget {
 
           SizedBox(height: AppConstants.spacingNavigationBar.h,),
         ],
+      ),
+    );
+  }
+}
+
+class _ImageSection extends StatelessWidget {
+  final String imageUrl = "assets/about.png";
+  const _ImageSection();
+
+  @override
+  Widget build (BuildContext context) {
+    return SizedBox(
+      height: 125.h,
+      width: double.infinity,
+      child: GestureDetector(
+        onTap: () => UIHelpers.showImageZoom(context, imageUrl),
+        child: ClipRRect(
+          borderRadius: BorderRadius.vertical(
+              top: Radius.circular(AppConstants.radiusL.r)
+          ),
+          child: Image.asset(
+            imageUrl,
+            fit: .cover,
+          ),
+        ),
       ),
     );
   }

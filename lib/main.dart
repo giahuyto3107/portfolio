@@ -12,11 +12,11 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       child: kReleaseMode
-          ? const MyApp()
-          : DevicePreview(
-              enabled: true,
-              builder: (context) => const MyApp(),
-            ),
+        ? const MyApp()
+        : DevicePreview(
+          enabled: true,
+          builder: (context) => const MyApp(),
+        ),
     ),
   );
 }
@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.light,
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,
-            brightness: Brightness.light,
-            useMaterial3: true,
+            brightness: Brightness.dark,
+            useMaterial3: false,
           ),
         );
       },
