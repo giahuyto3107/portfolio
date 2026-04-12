@@ -11,15 +11,20 @@ class MainWrapper extends StatelessWidget {
   Widget build (BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: AppConstants.spacingL.w,
-            right: AppConstants.spacingL.w,
-            // top: AppConstants.spacingM.h,
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: AppConstants.spacingL.w,
+                right: AppConstants.spacingL.w,
+                // top: AppConstants.spacingM.h,
+              ),
+              child: child,
+            ),
           ),
-          child: child,
         ),
       )
     );
