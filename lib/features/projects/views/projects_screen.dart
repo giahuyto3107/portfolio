@@ -51,8 +51,8 @@ class _Content extends StatelessWidget {
       ),
       Project(
         title: 'Tiktok-clone',
-        description: 'Android app for a short-video social media application.',
-        techStack: ['Jetpack compose', 'Api Integration', 'FastAPI', 'MySQL', 'Firebase'],
+        description: 'A full-featured Android application built with Kotlin and Jetpack Compose that replicates the core experience of TikTok. The app covers the entire user journey — from authentication to video creation, social interactions, real-time messaging, push notifications, and an admin dashboard — all backed by a custom FastAPI API and Firebase services.',
+        techStack: ['Jetpack Compose', 'Kotlin', 'FastAPI', 'Firebase', 'ExoPlayer', 'CameraX', 'Clean Architecture'],
         onDemoTap: () => {},
         coverImagePath: 'assets/tiktok.png',
         isCover: false,
