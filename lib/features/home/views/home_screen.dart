@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 import 'package:portfolio/core/utils/ui_helpers.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/home/data/models/social_account.dart';
@@ -157,7 +158,7 @@ class _SocialAccountsSection extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: socialAccounts.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,          // Number of columns
+                crossAxisCount: Responsive.isDesktop(context) ? 5 : Responsive.isTablet(context) ? 4 : 3, // columns based on layout
                 mainAxisSpacing: 10.0.h,      // Vertical spacing
                 crossAxisSpacing: 10.0.w,     // Horizontal spacing
                 childAspectRatio: 1.0,      // Keep them square (1.0) or rectangular
