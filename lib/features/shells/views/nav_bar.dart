@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 
 class NavBar extends StatelessWidget {
   final int currentIndex;
@@ -19,13 +20,13 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(50.sp), // Matches your design
+      borderRadius: BorderRadius.circular(getResponsiveFont(context, 50)), // Matches your design
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // The "Frosted" effect
         child: Container(
           decoration: BoxDecoration(
             color: Color(0xff07203e).withAlpha(178),
-            borderRadius: BorderRadius.circular(50.sp),
+            borderRadius: BorderRadius.circular(getResponsiveFont(context, 50)),
             border: Border.all(
               color: const Color(0xffE6E6E6).withAlpha(127), // Lighter border
               width: 1.w
@@ -112,7 +113,7 @@ class _NavBarItem extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: AppConstants.fontXL.sp,
+                size: getResponsiveFont(context, AppConstants.fontXL),
                 color: isSelected ? AppColors.textOnDark : AppColors.disable,
               ),
             ],

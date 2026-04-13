@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 
 class HighLightTitle extends StatelessWidget {
   final String primaryText;
@@ -20,7 +21,9 @@ class HighLightTitle extends StatelessWidget {
         Text(
           primaryText,
           style: TextStyle(
-            fontSize: AppConstants.fontXL.sp,
+            fontSize: Responsive.isDesktop(context)
+              ? getResponsiveFont(context, AppConstants.fontXXXL)
+              : getResponsiveFont(context, AppConstants.fontXXL),
             fontWeight: .w600,
             color: AppColors.textOnDark
           ),
@@ -38,7 +41,9 @@ class HighLightTitle extends StatelessWidget {
         secondaryText == "" ? Container() : Text(
           secondaryText,
           style: TextStyle(
-            fontSize: AppConstants.fontXS.sp,
+            fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontL)
+                : getResponsiveFont(context, AppConstants.fontM),
             fontWeight: .w400,
             color: AppColors.secondaryText
           ),

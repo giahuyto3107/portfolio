@@ -8,6 +8,7 @@ import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/router/app_routes.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -196,7 +197,7 @@ class _TechIconState extends State<_TechIcon> with SingleTickerProviderStateMixi
         child: Icon(
           widget.icon,
           color: Colors.white,
-          size: AppConstants.fontL.sp,
+          size: getResponsiveFont(context, AppConstants.fontL),
         ),
       ),
     );
@@ -211,7 +212,7 @@ class _PrimaryTitle extends StatelessWidget {
     return Text(
       AppStrings.primaryAppTitle,
       style: TextStyle(
-        fontSize: AppConstants.fontL.sp,
+        fontSize: getResponsiveFont(context, AppConstants.fontL),
         fontWeight: .w600,
         color: AppColors.textOnDark,
       ),
@@ -228,7 +229,7 @@ class _SecondaryTitle extends StatelessWidget {
     return Text(
       AppStrings.secondaryAppTitle,
       style: TextStyle(
-        fontSize: AppConstants.fontXS.sp,
+        fontSize: getResponsiveFont(context, AppConstants.fontXS),
         fontWeight: .w400,
         color: AppColors.secondaryText,
       ),
@@ -261,14 +262,14 @@ class _ViewMyWorkButton extends StatelessWidget {
             Icon(
               Icons.arrow_forward,
               color: AppColors.textOnDark,
-              size: AppConstants.fontM.sp,
+              size: getResponsiveFont(context, AppConstants.fontM),
               weight: AppConstants.borderMedium,
             ),
             SizedBox(width: AppConstants.spacingS.w,),
             Text(
               AppStrings.viewMyWork,
               style: TextStyle(
-                fontSize: AppConstants.fontS.sp,
+                fontSize: getResponsiveFont(context, AppConstants.fontS),
                 fontWeight: .w500,
                 color: AppColors.textOnDark
               ),
