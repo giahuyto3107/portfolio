@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/constants.dart';
 import 'package:portfolio/core/theme/theme.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 import 'package:portfolio/core/utils/ui_helpers.dart';
 import 'package:portfolio/features/projects/data/models/project.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -92,7 +93,9 @@ class _ProjectLowerSection extends StatelessWidget {
           Text(
             project.title,
             style: TextStyle(
-              fontSize: AppConstants.fontM.sp,
+              fontSize: Responsive.isDesktop(context)
+                  ? getResponsiveFont(context, AppConstants.fontL)
+                  : getResponsiveFont(context, AppConstants.fontM),
               fontWeight: .w500,
               color: AppColors.textOnDark
             ),
@@ -101,7 +104,9 @@ class _ProjectLowerSection extends StatelessWidget {
           Text(
             project.description,
             style: TextStyle(
-              fontSize: AppConstants.fontS.sp,
+              fontSize: Responsive.isDesktop(context)
+                  ? getResponsiveFont(context, AppConstants.fontL)
+                  : getResponsiveFont(context, AppConstants.fontM),
               fontWeight: .w400,
               color: AppColors.disable
             ),
@@ -174,7 +179,9 @@ class _TechStackContainer extends StatelessWidget {
       child: Text(
         skill,
         style: TextStyle(
-          fontSize: AppConstants.fontXS.sp,
+          fontSize: Responsive.isDesktop(context)
+              ? getResponsiveFont(context, AppConstants.fontS)
+              : getResponsiveFont(context, AppConstants.fontXS),
           fontWeight: .w500,
           color: AppColors.textOnDark
         ),
@@ -246,13 +253,17 @@ class _ActionContainer extends StatelessWidget {
           Icon(
             icon,
             color: AppColors.textOnDark,
-            size: AppConstants.fontL.sp,
+            size: Responsive.isDesktop(context)
+              ? getResponsiveFont(context, AppConstants.fontXL)
+              : getResponsiveFont(context, AppConstants.fontL),
           ),
           SizedBox(width: AppConstants.spacingXS.w,),
           Text(
             label,
             style: TextStyle(
-              fontSize: AppConstants.fontXS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontS)
+                : getResponsiveFont(context, AppConstants.fontXS),
               fontWeight: .w500,
               color: AppColors.textOnDark
             ),
@@ -336,7 +347,9 @@ class _SubCodeLine extends StatelessWidget {
             if (iconData != null) ...[
               Icon(
                 iconData,
-                size: AppConstants.fontL.sp,
+                size: Responsive.isDesktop(context)
+                    ? getResponsiveFont(context, AppConstants.fontXL)
+                    : getResponsiveFont(context, AppConstants.fontL),
                 color: AppColors.textOnDark,
               ),
               SizedBox(width: AppConstants.spacingS.w),
@@ -344,7 +357,9 @@ class _SubCodeLine extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                fontSize: AppConstants.fontXS.sp,
+                fontSize: Responsive.isDesktop(context)
+                    ? getResponsiveFont(context, AppConstants.fontS)
+                    : getResponsiveFont(context, AppConstants.fontXS),
                 fontWeight: FontWeight.w500,
                 color: AppColors.textOnDark,
               ),

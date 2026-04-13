@@ -26,13 +26,17 @@ class _HomeContent extends StatelessWidget {
 
   @override
   Widget build (BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: AppConstants.spacingS.h,),
-        const _OwnerInformation(),
-        SizedBox(height: AppConstants.spacingL.h,),
-        const _SocialAccountsSection(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: AppConstants.spacingS.h,),
+          const _OwnerInformation(),
+          SizedBox(height: AppConstants.spacingL.h,),
+          const _SocialAccountsSection(),
+      
+          SizedBox(height: AppConstants.spacingNavigationBar.h,),
+        ],
+      ),
     );
   }
 }
@@ -53,8 +57,8 @@ class _OwnerInformation extends StatelessWidget {
             child: Image.asset(
               'assets/avatar.jpg',
               fit: BoxFit.cover,
-              height: size.w,
-              width: size.w,
+              height: getResponsiveWidth(context, size * 1.0),
+              width: getResponsiveWidth(context, size * 1.0),
             ),
           ),
         ),
@@ -62,14 +66,14 @@ class _OwnerInformation extends StatelessWidget {
         SizedBox(height: AppConstants.spacingXS.h,),
         _OwnerTitle(
           title: 'Tô Gia Huy',
-          size: AppConstants.fontL.sp,
+          size: getResponsiveFont(context, AppConstants.fontXXL),
           weight: .w500,
           color: AppColors.textOnDark
         ),
 
         _OwnerTitle(
             title: 'Flutter Developer | Android Developer',
-            size: AppConstants.fontS.sp,
+            size: getResponsiveFont(context, AppConstants.fontM),
             weight: .w400,
             color: AppColors.secondaryText
         )
@@ -159,8 +163,8 @@ class _SocialAccountsSection extends StatelessWidget {
               itemCount: socialAccounts.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: Responsive.isDesktop(context) ? 5 : Responsive.isTablet(context) ? 4 : 3, // columns based on layout
-                mainAxisSpacing: 10.0.h,      // Vertical spacing
-                crossAxisSpacing: 10.0.w,     // Horizontal spacing
+                mainAxisSpacing: getResponsiveHeight(context, 10),      // Vertical spacing
+                crossAxisSpacing: getResponsiveWidth(context, 10),     // Horizontal spacing
                 childAspectRatio: 1.0,      // Keep them square (1.0) or rectangular
               ),
               itemBuilder: (context, index) {
@@ -192,7 +196,7 @@ class _ContactMeSection extends StatelessWidget {
             Text(
               "Can I help you?",
               style: TextStyle(
-                fontSize: AppConstants.fontXS.sp,
+                fontSize: getResponsiveFont(context, AppConstants.fontM),
                 fontWeight: .w400,
                 color: AppColors.textOnDark
               ),
@@ -200,7 +204,7 @@ class _ContactMeSection extends StatelessWidget {
             Text(
               "Let's work!",
               style: TextStyle(
-                fontSize: AppConstants.fontXS.sp,
+                fontSize: getResponsiveFont(context, AppConstants.fontM),
                 fontWeight: .w400,
                 color: AppColors.textOnDark
               ),
@@ -224,7 +228,7 @@ class _ContactMeSection extends StatelessWidget {
           child: Text(
             AppStrings.contactMe,
             style: TextStyle(
-              fontSize: AppConstants.fontXS.sp,
+              fontSize: getResponsiveFont(context, AppConstants.fontM),
               fontWeight: .w500,
               color: AppColors.textOnDark
             ),
@@ -264,31 +268,35 @@ class _SocialAccountContainer extends StatelessWidget {
           gradient: AppColors.verticalGradientButton,
           borderRadius: BorderRadius.circular(AppConstants.radiusL.r)
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppConstants.spacingM.w,
-          ),
-          child: Column(
-            mainAxisAlignment: .center,
-            crossAxisAlignment: .center,
-            children: [
-              Icon(
-                icon,
-                size: AppConstants.fontXXL.r,
+        padding: EdgeInsets.symmetric(
+          horizontal: Responsive.isDesktop(context)
+            ? 0
+            : getResponsiveFont(context, AppConstants.fontS)
+        ),
+        child: Column(
+          mainAxisAlignment: .center,
+          crossAxisAlignment: .center,
+          children: [
+            Icon(
+              icon,
+              size: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontTitleS)
+                : getResponsiveFont(context, AppConstants.fontXXXL),
+              color: AppColors.textOnDark
+            ),
+            SizedBox(height: getResponsiveHeight(context, AppConstants.spacingS),),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: Responsive.isDesktop(context)
+                  ? getResponsiveFont(context, AppConstants.fontM)
+                  : getResponsiveFont(context, AppConstants.fontS),
+                fontWeight: .w300,
                 color: AppColors.textOnDark
               ),
-              SizedBox(height: AppConstants.spacingS.h,),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: AppConstants.fontXS.sp,
-                  fontWeight: .w400,
-                  color: AppColors.textOnDark
-                ),
-                textAlign: .center,
-              )
-            ],
-          ),
+              textAlign: .center,
+            )
+          ],
         ),
       ),
     );

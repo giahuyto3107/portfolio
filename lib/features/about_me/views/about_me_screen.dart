@@ -4,6 +4,7 @@ import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
 import 'package:portfolio/core/utils/ui_helpers.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/core/widgets/project_container.dart';
@@ -145,7 +146,9 @@ class _SelfDescriptionContainer extends StatelessWidget {
           Text(
             "Hi there, Harry (To Gia Huy) here",
             style: TextStyle(
-              fontSize: AppConstants.fontS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontL)
+                : getResponsiveFont(context, AppConstants.fontS),
               fontWeight: .w600,
               color: AppColors.textOnDark
             ),
@@ -154,7 +157,9 @@ class _SelfDescriptionContainer extends StatelessWidget {
           Text(
             AppStrings.bio1,
             style: TextStyle(
-              fontSize: AppConstants.fontXS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontM)
+                : getResponsiveFont(context, AppConstants.fontXS),
               fontWeight: .w400,
               color: AppColors.disable
             ),
@@ -164,7 +169,9 @@ class _SelfDescriptionContainer extends StatelessWidget {
           Text(
             AppStrings.bio2,
             style: TextStyle(
-              fontSize: AppConstants.fontXS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontM)
+                : getResponsiveFont(context, AppConstants.fontXS),
               fontWeight: .w400,
               color: AppColors.disable
             ),
@@ -233,7 +240,9 @@ class _SkillsContainer extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          fontSize: AppConstants.fontXS.sp,
+          fontSize: Responsive.isDesktop(context)
+            ? getResponsiveFont(context, AppConstants.fontM)
+            : getResponsiveFont(context, AppConstants.fontXS),
           fontWeight: .w400,
           color: AppColors.textOnDark
         )

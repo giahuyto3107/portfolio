@@ -92,9 +92,9 @@ class _SkillsSection extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: skills.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: Responsive.isDesktop(context) ? 3 : Responsive.isTablet(context) ? 3 : 2, // columns
-        mainAxisSpacing: 10.0.h,      // Vertical spacing
-        crossAxisSpacing: 10.0.w,     // Horizontal spacing
+        crossAxisCount: Responsive.isDesktop(context) ? 4 : Responsive.isTablet(context) ? 4 : 3, // columns
+        mainAxisSpacing: getResponsiveHeight(context, 20),      // Vertical spacing
+        crossAxisSpacing: getResponsiveWidth(context, 20),     // Horizontal spacing
         childAspectRatio: 1.0,      // Keep them square (1.0) or rectangular
       ),
       itemBuilder: (context, index) {
@@ -123,27 +123,39 @@ class _SkillContainer extends StatelessWidget {
           width: AppConstants.borderThick.w
         )
       ),
+      padding: EdgeInsets.symmetric(
+        horizontal:  getResponsiveWidth(context, AppConstants.spacingS)
+      ),
       child: Column(
         crossAxisAlignment: .center,
         mainAxisAlignment: .center,
+        mainAxisSize: .min,
         children: [
           Stack(
             alignment: .center,
             children: [
               SizedBox(
-                height: 50.w,
-                width: 50.w,
+                height: Responsive.isDesktop(context)
+                  ? 50
+                  : 30,
+                width: Responsive.isDesktop(context)
+                  ? 50
+                  : 30,
                 child: CircularProgressIndicator(
                   value: skill.percentage,
                   valueColor: AlwaysStoppedAnimation<Color>(skill.color),
-                  strokeWidth: 5.w,
+                  strokeWidth: Responsive.isDesktop(context)
+                    ? 5
+                    : 3,
                   backgroundColor: Color(0xff223242),
                 ),
               ),
 
               Icon(
                 skill.icon,
-                size: AppConstants.fontXL.sp,
+                size: Responsive.isDesktop(context)
+                    ? getResponsiveFont(context, AppConstants.fontXL)
+                    : getResponsiveFont(context, AppConstants.fontS),
                 color: skill.color
               )
             ],
@@ -153,15 +165,21 @@ class _SkillContainer extends StatelessWidget {
           Text(
             skill.label,
             style: TextStyle(
-              fontSize: AppConstants.fontXS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontM)
+                : getResponsiveFont(context, AppConstants.fontXS),
               fontWeight: .w600,
               color: AppColors.textOnDark
             ),
+            textAlign: .center,
           ),
+          SizedBox(height: getResponsiveHeight(context, AppConstants.spacingXS),),
           Text(
             "${skill.percentage * 100}%",
             style: TextStyle(
-              fontSize: AppConstants.fontXXS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontS)
+                : getResponsiveFont(context, AppConstants.fontXXS),
               fontWeight: .w500,
               color: AppColors.textOnDark
             ),

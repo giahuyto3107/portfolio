@@ -1,4 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+double getResponsiveFont(BuildContext context, double baseSize) {
+  return Responsive.isMobile(context) ? baseSize.sp : baseSize;
+}
+
+double getResponsiveHeight(BuildContext context, double baseHeight) {
+  return Responsive.isMobile(context) ? baseHeight.h : baseHeight;
+}
+
+double getResponsiveWidth(BuildContext context, double baseWidth) {
+  return Responsive.isMobile(context) ? baseWidth.w : baseWidth;
+}
 
 class Responsive extends StatelessWidget {
   final Widget mobile;

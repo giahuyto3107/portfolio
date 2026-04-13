@@ -89,7 +89,7 @@ class _Content extends StatelessWidget {
             }
           ),
 
-          SizedBox(height: AppConstants.spacingXXXL.h,),
+          SizedBox(height: AppConstants.spacingNavigationBar.h,),
         ],
       ),
     );
