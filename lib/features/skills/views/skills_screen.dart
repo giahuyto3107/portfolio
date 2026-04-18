@@ -154,8 +154,8 @@ class _SkillContainer extends StatelessWidget {
               Icon(
                 skill.icon,
                 size: Responsive.isDesktop(context)
-                    ? getResponsiveFont(context, AppConstants.fontXL)
-                    : getResponsiveFont(context, AppConstants.fontS),
+                  ? getResponsiveFont(context, AppConstants.fontXL)
+                  : getResponsiveFont(context, AppConstants.fontS),
                 color: skill.color
               )
             ],
