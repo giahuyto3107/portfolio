@@ -5,6 +5,7 @@ import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/core/widgets/project_container.dart';
 import 'package:portfolio/features/projects/data/models/project.dart';
+import 'package:portfolio/features/projects/views/demo_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectsScreen extends StatelessWidget {
@@ -30,14 +31,16 @@ class _Content extends StatelessWidget {
         techStack: [
           'Flutter (Dart 3)',
           'Dio',
+          'Riverpod generator'
           'FastAPI',
           'MySQL',
           'SQLAlchemy',
-          'Google Gemini',
+          'Google Gemini API',
           'Firebase Admin SDK',
           'CI/CD',
           'UI/UX',
-          'MVVM'],
+          'MVVM'
+        ],
         onCodeTap: () => {},
         onDemoTap: () => {},
         isCover: true,
@@ -49,7 +52,7 @@ class _Content extends StatelessWidget {
         description: 'Hands-free Flutter mobile app for location-triggered multilingual audio guides for street food discovery.',
         techStack: [
           'Flutter (Dart 3)',
-          'Riverpod',
+          'Riverpod Generator',
           'Vietmap GL',
           'Just Audio',
           'Geolocator',
@@ -72,8 +75,12 @@ class _Content extends StatelessWidget {
           'Firebase',
           'ExoPlayer',
           'CameraX',
-          'MVVM'],
-        onDemoTap: () => {},
+          'MVVM'
+        ],
+        onDemoTap: () => showDialog(
+          context: context,
+          builder: (context) => const DemoDialog(assetUrl: 'assets/tiktok_clone_demo.mp4'),
+        ),
         coverImagePath: 'assets/tiktok.png',
         isCover: false,
         subLinks: {
