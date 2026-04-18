@@ -25,12 +25,23 @@ class _Content extends StatelessWidget {
   Widget build (BuildContext context) {
     List<Project> projects = [
       Project(
-        title: 'Nutripal',
+        title: 'MacroShot',
         description: 'AI-Powered Nutrition & Fitness App',
-        techStack: ['Flutter', 'Api Integration', 'UI/UX', 'FastAPI', 'MySQL', 'Firebase'],
+        techStack: [
+          'Flutter (Dart 3)',
+          'Dio',
+          'FastAPI',
+          'MySQL',
+          'SQLAlchemy',
+          'Google Gemini',
+          'Firebase Admin SDK',
+          'CI/CD',
+          'UI/UX',
+          'MVVM'],
         onCodeTap: () => {},
         onDemoTap: () => {},
-        coverImagePath: '',
+        isCover: true,
+        coverImagePath: 'assets/macro_shot.png',
       ),
       Project(
         coverImagePath: 'assets/automatic_demonstration.png',
@@ -43,7 +54,8 @@ class _Content extends StatelessWidget {
           'Just Audio',
           'Geolocator',
           'Dio',
-          'Intl'
+          'Intl',
+          'MVVM'
         ],
         onCodeTap: () =>
           launchUrl(Uri.parse('https://github.com/giahuyto3107/automatic_demonstration.git')),
@@ -51,8 +63,16 @@ class _Content extends StatelessWidget {
       ),
       Project(
         title: 'Tiktok-clone',
-        description: 'A full-featured Android application built with Kotlin and Jetpack Compose that replicates the core experience of TikTok. The app covers the entire user journey — from authentication to video creation, social interactions, real-time messaging, push notifications, and an admin dashboard — all backed by a custom FastAPI API and Firebase services.',
-        techStack: ['Jetpack Compose', 'Kotlin', 'FastAPI', 'Firebase', 'ExoPlayer', 'CameraX', 'Clean Architecture'],
+        description: 'A full-featured Android application built with Kotlin and Jetpack Compose that replicates the core experience of TikTok.',
+        techStack: [
+          'Jetpack Compose',
+          'Kotlin',
+          'Koin',
+          'FastAPI',
+          'Firebase',
+          'ExoPlayer',
+          'CameraX',
+          'MVVM'],
         onDemoTap: () => {},
         coverImagePath: 'assets/tiktok.png',
         isCover: false,
