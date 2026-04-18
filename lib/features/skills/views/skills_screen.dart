@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/skills/data/models/skill.dart';
@@ -26,16 +27,18 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build (BuildContext context) {
-    return Column(
-      crossAxisAlignment: .center,
-      children: [
-        SizedBox(height: AppConstants.spacingS.h,),
-        HighLightTitle(
-          primaryText: "My Skills",
-          secondaryText: "Technologies | work with",
-        ),
-        _SkillsSection()
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: .center,
+        children: [
+          SizedBox(height: AppConstants.spacingS.h,),
+          HighLightTitle(
+            primaryText: "My Skills",
+            secondaryText: "Technologies | work with",
+          ),
+          _SkillsSection()
+        ],
+      ),
     );
   }
 }
@@ -73,7 +76,7 @@ class _SkillsSection extends StatelessWidget {
       Skill(
         percentage: 0.70,
         icon: FontAwesomeIcons.fire,
-        label: 'Flutter',
+        label: 'Firebase',
         color: Color(0xfffbb142),
       ),
       Skill(
@@ -89,9 +92,9 @@ class _SkillsSection extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: skills.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,          // Number of columns
-        mainAxisSpacing: 10.0.h,      // Vertical spacing
-        crossAxisSpacing: 10.0.w,     // Horizontal spacing
+        crossAxisCount: Responsive.isDesktop(context) ? 4 : Responsive.isTablet(context) ? 4 : 3, // columns
+        mainAxisSpacing: getResponsiveHeight(context, 20),      // Vertical spacing
+        crossAxisSpacing: getResponsiveWidth(context, 20),     // Horizontal spacing
         childAspectRatio: 1.0,      // Keep them square (1.0) or rectangular
       ),
       itemBuilder: (context, index) {
@@ -120,27 +123,39 @@ class _SkillContainer extends StatelessWidget {
           width: AppConstants.borderThick.w
         )
       ),
+      padding: EdgeInsets.symmetric(
+        horizontal:  getResponsiveWidth(context, AppConstants.spacingS)
+      ),
       child: Column(
         crossAxisAlignment: .center,
         mainAxisAlignment: .center,
+        mainAxisSize: .min,
         children: [
           Stack(
             alignment: .center,
             children: [
               SizedBox(
-                height: 50.w,
-                width: 50.w,
+                height: Responsive.isDesktop(context)
+                  ? 50
+                  : 30,
+                width: Responsive.isDesktop(context)
+                  ? 50
+                  : 30,
                 child: CircularProgressIndicator(
                   value: skill.percentage,
                   valueColor: AlwaysStoppedAnimation<Color>(skill.color),
-                  strokeWidth: 5.w,
+                  strokeWidth: Responsive.isDesktop(context)
+                    ? 5
+                    : 3,
                   backgroundColor: Color(0xff223242),
                 ),
               ),
 
               Icon(
                 skill.icon,
-                size: AppConstants.fontXL.sp,
+                size: Responsive.isDesktop(context)
+                  ? getResponsiveFont(context, AppConstants.fontXL)
+                  : getResponsiveFont(context, AppConstants.fontS),
                 color: skill.color
               )
             ],
@@ -150,15 +165,21 @@ class _SkillContainer extends StatelessWidget {
           Text(
             skill.label,
             style: TextStyle(
-              fontSize: AppConstants.fontXS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontM)
+                : getResponsiveFont(context, AppConstants.fontXS),
               fontWeight: .w600,
               color: AppColors.textOnDark
             ),
+            textAlign: .center,
           ),
+          SizedBox(height: getResponsiveHeight(context, AppConstants.spacingXS),),
           Text(
             "${skill.percentage * 100}%",
             style: TextStyle(
-              fontSize: AppConstants.fontXXS.sp,
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontS)
+                : getResponsiveFont(context, AppConstants.fontXXS),
               fontWeight: .w500,
               color: AppColors.textOnDark
             ),

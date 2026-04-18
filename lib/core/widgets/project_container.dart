@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/constants.dart';
 import 'package:portfolio/core/theme/theme.dart';
+import 'package:portfolio/core/utils/responsive.dart';
+import 'package:portfolio/core/utils/ui_helpers.dart';
 import 'package:portfolio/features/projects/data/models/project.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,19 +41,22 @@ class _ProjectUpperSection extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppColors.horizontalGradientButton,
         borderRadius: BorderRadius.vertical(
-            top: Radius.circular(AppConstants.radiusL.r)
+          top: Radius.circular(AppConstants.radiusL.r)
         ),
       ),
     ) : SizedBox(
       height: 125.h,
       width: double.infinity,
-      child: ClipRRect(
-        borderRadius: BorderRadius.vertical(
+      child: GestureDetector(
+        onTap: () => UIHelpers.showImageZoom(context, project.coverImagePath),
+        child: ClipRRect(
+          borderRadius: BorderRadius.vertical(
             top: Radius.circular(AppConstants.radiusL.r)
-        ),
-        child: Image.asset(
-          project.coverImagePath,
-          fit: project.isCover ? .cover : .contain,
+          ),
+          child: Image.asset(
+            project.coverImagePath,
+            fit: project.isCover ? .cover : .contain,
+          ),
         ),
       ),
     );
@@ -67,13 +73,14 @@ class _ProjectLowerSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool showCodeTap = project.onCodeTap != null;
-
+    bool showDemoTap = project.onDemoTap != null;
+    
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
           color: Color(0xff152f50),
           borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(AppConstants.radiusL.r)
+            bottom: Radius.circular(AppConstants.radiusL.r)
           )
       ),
       padding: EdgeInsets.symmetric(
@@ -86,18 +93,22 @@ class _ProjectLowerSection extends StatelessWidget {
           Text(
             project.title,
             style: TextStyle(
-                fontSize: AppConstants.fontM.sp,
-                fontWeight: .w500,
-                color: AppColors.textOnDark
+              fontSize: Responsive.isDesktop(context)
+                  ? getResponsiveFont(context, AppConstants.fontL)
+                  : getResponsiveFont(context, AppConstants.fontM),
+              fontWeight: .w500,
+              color: AppColors.textOnDark
             ),
           ),
           SizedBox(height: AppConstants.spacingXS.h,),
           Text(
             project.description,
             style: TextStyle(
-                fontSize: AppConstants.fontS.sp,
-                fontWeight: .w400,
-                color: AppColors.disable
+              fontSize: Responsive.isDesktop(context)
+                  ? getResponsiveFont(context, AppConstants.fontL)
+                  : getResponsiveFont(context, AppConstants.fontM),
+              fontWeight: .w400,
+              color: AppColors.disable
             ),
           ),
           SizedBox(height: AppConstants.spacingS.h,),
@@ -106,13 +117,24 @@ class _ProjectLowerSection extends StatelessWidget {
           ),
 
           SizedBox(height: AppConstants.spacingM.h,),
-          _ActionButtons(
-            project: project,
-            showCodeTap: showCodeTap,
-          ),
 
-          showCodeTap ? Container()
-              : _SubCodeRow(subLinks: project.subLinks!,)
+          if (!showDemoTap) _SubActionRow(subLinks: project.subLinks!)
+
+          else showCodeTap
+            ? _ActionButtons(
+              project: project,
+              showCodeTap: showCodeTap,
+            )
+            : Column(
+              children: [
+                _ActionButtons(
+                  project: project,
+                  showCodeTap: showCodeTap,
+                ),
+                SizedBox(height: AppConstants.spacingM.w,),
+                _SubActionRow(subLinks: project.subLinks!)
+              ],
+            )
         ],
       ),
     );
@@ -157,9 +179,11 @@ class _TechStackContainer extends StatelessWidget {
       child: Text(
         skill,
         style: TextStyle(
-            fontSize: AppConstants.fontXS.sp,
-            fontWeight: .w500,
-            color: AppColors.textOnDark
+          fontSize: Responsive.isDesktop(context)
+              ? getResponsiveFont(context, AppConstants.fontS)
+              : getResponsiveFont(context, AppConstants.fontXS),
+          fontWeight: .w500,
+          color: AppColors.textOnDark
         ),
       ),
     );
@@ -182,18 +206,18 @@ class _ActionButtons extends StatelessWidget {
         showCodeTap ? GestureDetector(
           onTap: () => project.onCodeTap!(),
           child: _ActionContainer(
-              bgColor: Color(0xff24242B),
-              icon: Icons.code,
-              label: 'Code'
+            bgColor: Color(0xff24242B),
+            icon: Icons.code,
+            label: 'Code'
           ),
         ) : Container(),
         showCodeTap ? SizedBox(width: AppConstants.spacingM.w,) : Container(),
         GestureDetector(
-          onTap: () => project.onDemoTap(),
+          onTap: () => project.onDemoTap!(),
           child: _ActionContainer(
-              bgColor: Color(0xff10B924),
-              icon: Icons.play_arrow,
-              label: 'Demo'
+            bgColor: Color(0xff10B924),
+            icon: Icons.play_arrow,
+            label: 'Demo'
           ),
         ),
       ],
@@ -216,8 +240,8 @@ class _ActionContainer extends StatelessWidget {
   Widget build (BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: .circular(AppConstants.radiusM.r)
+        color: bgColor,
+        borderRadius: .circular(AppConstants.radiusM.r)
       ),
       padding: EdgeInsets.symmetric(
         horizontal: AppConstants.spacingM.w,
@@ -229,15 +253,19 @@ class _ActionContainer extends StatelessWidget {
           Icon(
             icon,
             color: AppColors.textOnDark,
-            size: AppConstants.fontL.sp,
+            size: Responsive.isDesktop(context)
+              ? getResponsiveFont(context, AppConstants.fontXL)
+              : getResponsiveFont(context, AppConstants.fontL),
           ),
           SizedBox(width: AppConstants.spacingXS.w,),
           Text(
             label,
             style: TextStyle(
-                fontSize: AppConstants.fontXS.sp,
-                fontWeight: .w500,
-                color: AppColors.textOnDark
+              fontSize: Responsive.isDesktop(context)
+                ? getResponsiveFont(context, AppConstants.fontS)
+                : getResponsiveFont(context, AppConstants.fontXS),
+              fontWeight: .w500,
+              color: AppColors.textOnDark
             ),
           )
         ],
@@ -246,30 +274,34 @@ class _ActionContainer extends StatelessWidget {
   }
 }
 
-class _SubCodeRow extends StatelessWidget {
-  final SubLinks subLinks;
-  const _SubCodeRow({required this.subLinks});
+class _SubActionRow extends StatelessWidget {
+  final Map<String, String> subLinks;
+  final List<Color> palette = const [
+    Color(0xfff97015), // Orange
+    Color(0xff6366f1), // Indigo
+  ];
+
+  const _SubActionRow({required this.subLinks});
 
   @override
   Widget build (BuildContext context) {
+    final entries = subLinks.entries.toList();
+
     return Column(
       children: [
-        SizedBox(height: AppConstants.spacingM.h,),
-
         Row(
-          children: [
-            _SubCodeLine(
-              label: "Mobile's repo",
-              link: subLinks.feLink,
-              color: Color(0xfff97015),
-            ),
-            SizedBox(width: AppConstants.spacingM.w),
-            _SubCodeLine(
-              label: "Backend's repo",
-              link: subLinks.beLink,
-              color: Color(0xff24242B),
-            ),
-          ],
+          children: List.generate(entries.length, (index) {
+            final entry = entries[index];
+
+            return Padding(
+              padding: EdgeInsets.only(right: AppConstants.spacingM.w),
+              child: _SubCodeLine(
+                label: entry.key,
+                link: entry.value,
+                color: palette[index % palette.length],
+              ),
+            );
+          })
         ),
       ],
     );
@@ -289,24 +321,50 @@ class _SubCodeLine extends StatelessWidget {
 
   @override
   Widget build (BuildContext context) {
+    IconData? iconData;
+    String cleanLabel = label.toLowerCase();
+
+    if (cleanLabel.contains('app store')) {
+      iconData = FontAwesomeIcons.appStoreIos;
+    } else if (cleanLabel.contains('google play')) {
+      iconData = FontAwesomeIcons.googlePlay;
+    }
+
     return GestureDetector(
       onTap: () => launchUrl(Uri.parse(link)),
       child: Container(
         decoration: BoxDecoration(
-            color: color,
-            borderRadius: .circular(AppConstants.radiusM.r)
+          color: color,
+          borderRadius: BorderRadius.circular(AppConstants.radiusM.r),
         ),
         padding: EdgeInsets.symmetric(
           horizontal: AppConstants.spacingM.w,
           vertical: AppConstants.spacingS.h,
         ),
-        child: Text(
-          label,
-          style: TextStyle(
-              fontSize: AppConstants.fontXS.sp,
-              fontWeight: .w500,
-              color: AppColors.textOnDark
-          ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (iconData != null) ...[
+              Icon(
+                iconData,
+                size: Responsive.isDesktop(context)
+                    ? getResponsiveFont(context, AppConstants.fontXL)
+                    : getResponsiveFont(context, AppConstants.fontL),
+                color: AppColors.textOnDark,
+              ),
+              SizedBox(width: AppConstants.spacingS.w),
+            ],
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: Responsive.isDesktop(context)
+                    ? getResponsiveFont(context, AppConstants.fontS)
+                    : getResponsiveFont(context, AppConstants.fontXS),
+                fontWeight: FontWeight.w500,
+                color: AppColors.textOnDark,
+              ),
+            ),
+          ],
         ),
       ),
     );

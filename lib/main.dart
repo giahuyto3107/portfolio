@@ -12,11 +12,11 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       child: kReleaseMode
-          ? const MyApp()
-          : DevicePreview(
-              enabled: true,
-              builder: (context) => const MyApp(),
-            ),
+        ? const MyApp()
+        : DevicePreview(
+          enabled: true,
+          builder: (context) => const MyApp(),
+        ),
     ),
   );
 }
@@ -27,25 +27,36 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      useInheritedMediaQuery: true,
-      builder: (context, child) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: appRouter,
-          locale: kReleaseMode ? null : DevicePreview.locale(context),
-          builder: kReleaseMode ? null : DevicePreview.appBuilder,
-          themeMode: ThemeMode.light,
-          theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-            brightness: Brightness.light,
-            useMaterial3: true,
-          ),
+    return Builder(
+      builder: (context) {
+        final screenWidth = MediaQuery.sizeOf(context).width;
+        final screenHeight = MediaQuery.sizeOf(context).height;
+
+        final designSize = screenWidth >= 600
+            ? Size(screenWidth, screenHeight)
+            : const Size(360, 690);
+
+        return ScreenUtilInit(
+          designSize: designSize,
+          minTextAdapt: true,
+          splitScreenMode: true,
+          useInheritedMediaQuery: true,
+          builder: (context, child) {
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              routerConfig: appRouter,
+              locale: kReleaseMode ? null : DevicePreview.locale(context),
+              builder: kReleaseMode ? null : DevicePreview.appBuilder,
+              themeMode: ThemeMode.light,
+              theme: ThemeData(
+                scaffoldBackgroundColor: Colors.white,
+                brightness: Brightness.dark,
+                useMaterial3: false,
+              ),
+            );
+          },
         );
-      },
+      }
     );
   }
 }

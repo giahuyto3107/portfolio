@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
 import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/utils/responsive.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/contact/data/models/contact.dart';
@@ -92,12 +93,12 @@ class _ContactsContent extends StatelessWidget {
             }
           ),
       
-          SizedBox(height: AppConstants.spacingL.h,),
-          const _SendMessageSection(),
-          SizedBox(height: AppConstants.spacingM.h,),
-          const _ViewMyWorkButton(),
-          SizedBox(height: AppConstants.spacingXXL.h,),
-          SizedBox(height: AppConstants.spacingXXL.h,),
+          // SizedBox(height: AppConstants.spacingL.h,),
+          // const _SendMessageSection(),
+          // SizedBox(height: AppConstants.spacingM.h,),
+          // const _ViewMyWorkButton(),
+          // SizedBox(height: AppConstants.spacingXXL.h,),
+          SizedBox(height: AppConstants.spacingNavigationBar.h,),
         ],
       ),
     );
@@ -116,8 +117,8 @@ class _ContactMethodContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppConstants.radiusM.r)
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: AppConstants.spacingS.w,
-        vertical: AppConstants.spacingS.h,
+        horizontal: getResponsiveWidth(context, AppConstants.spacingM),
+        vertical: getResponsiveHeight(context, AppConstants.spacingM),
       ),
       child: Row(
         children: [
@@ -133,7 +134,7 @@ class _ContactMethodContainer extends StatelessWidget {
             child: Icon(
               contact.icon,
               color: AppColors.textOnDark,
-              size: AppConstants.fontL.sp,
+              size: getResponsiveFont(context, AppConstants.fontL),
             ),
           ),
           SizedBox(width: AppConstants.spacingM.w,),
@@ -144,7 +145,7 @@ class _ContactMethodContainer extends StatelessWidget {
                 contact.label,
                 style: TextStyle(
                   color: AppColors.textOnDark,
-                  fontSize: AppConstants.fontS.sp,
+                  fontSize: getResponsiveFont(context, AppConstants.fontM),
                   fontWeight: .w400
                 ),
               ),
@@ -152,7 +153,7 @@ class _ContactMethodContainer extends StatelessWidget {
                 contact.content,
                 style: TextStyle(
                   color: AppColors.textOnDark,
-                  fontSize: AppConstants.fontS.sp,
+                  fontSize: getResponsiveFont(context, AppConstants.fontM),
                   fontWeight: .w500
                 ),
               )
@@ -183,7 +184,7 @@ class _SendMessageSection extends StatelessWidget {
           "Send a Message",
           style: TextStyle(
             color: AppColors.textOnDark,
-            fontSize: AppConstants.fontM.sp,
+            fontSize: getResponsiveFont(context, AppConstants.fontM),
             fontWeight: .w500
           ),
         ),
@@ -226,10 +227,14 @@ class _FieldTextField extends StatelessWidget {
       maxLines: maxLines,
       style: TextStyle(
         color: AppColors.textOnDark,
-        fontSize: AppConstants.fontS.sp,
+        fontSize: getResponsiveFont(context, AppConstants.fontS),
       ),
       decoration: InputDecoration(
         hintText: hint,
+          hintStyle: TextStyle(
+            color: AppColors.secondaryText, // Or Colors.grey[400] if secondaryText is still too dark
+            fontSize: getResponsiveFont(context, AppConstants.fontM),
+          ),
         fillColor: Color(0xff1e1d23),
         filled: true,
         contentPadding: EdgeInsets.all(AppConstants.spacingM.r),
@@ -271,14 +276,14 @@ class _ViewMyWorkButton extends ConsumerWidget {
             Icon(
               Icons.arrow_forward,
               color: AppColors.textOnDark,
-              size: AppConstants.fontL.sp,
+              size: getResponsiveFont(context, AppConstants.fontL),
               weight: AppConstants.borderMedium,
             ),
             SizedBox(width: AppConstants.spacingS.w,),
             Text(
               AppStrings.viewMyWork,
               style: TextStyle(
-                fontSize: AppConstants.fontS.sp,
+                fontSize: getResponsiveFont(context, AppConstants.fontS),
                 fontWeight: .w500,
                 color: AppColors.textOnDark
               ),
