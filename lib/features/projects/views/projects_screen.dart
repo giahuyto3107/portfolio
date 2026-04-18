@@ -5,6 +5,7 @@ import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/core/widgets/project_container.dart';
 import 'package:portfolio/features/projects/data/models/project.dart';
+import 'package:portfolio/features/projects/views/demo_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectsScreen extends StatelessWidget {
@@ -25,12 +26,25 @@ class _Content extends StatelessWidget {
   Widget build (BuildContext context) {
     List<Project> projects = [
       Project(
-        title: 'Nutripal',
+        title: 'MacroShot',
         description: 'AI-Powered Nutrition & Fitness App',
-        techStack: ['Flutter', 'Api Integration', 'UI/UX', 'FastAPI', 'MySQL', 'Firebase'],
+        techStack: [
+          'Flutter (Dart 3)',
+          'Dio',
+          'Riverpod generator'
+          'FastAPI',
+          'MySQL',
+          'SQLAlchemy',
+          'Google Gemini API',
+          'Firebase Admin SDK',
+          'CI/CD',
+          'UI/UX',
+          'MVVM'
+        ],
         onCodeTap: () => {},
         onDemoTap: () => {},
-        coverImagePath: '',
+        isCover: true,
+        coverImagePath: 'assets/macro_shot.png',
       ),
       Project(
         coverImagePath: 'assets/automatic_demonstration.png',
@@ -38,12 +52,13 @@ class _Content extends StatelessWidget {
         description: 'Hands-free Flutter mobile app for location-triggered multilingual audio guides for street food discovery.',
         techStack: [
           'Flutter (Dart 3)',
-          'Riverpod',
+          'Riverpod Generator',
           'Vietmap GL',
           'Just Audio',
           'Geolocator',
           'Dio',
-          'Intl'
+          'Intl',
+          'MVVM'
         ],
         onCodeTap: () =>
           launchUrl(Uri.parse('https://github.com/giahuyto3107/automatic_demonstration.git')),
@@ -51,9 +66,21 @@ class _Content extends StatelessWidget {
       ),
       Project(
         title: 'Tiktok-clone',
-        description: 'A full-featured Android application built with Kotlin and Jetpack Compose that replicates the core experience of TikTok. The app covers the entire user journey — from authentication to video creation, social interactions, real-time messaging, push notifications, and an admin dashboard — all backed by a custom FastAPI API and Firebase services.',
-        techStack: ['Jetpack Compose', 'Kotlin', 'FastAPI', 'Firebase', 'ExoPlayer', 'CameraX', 'Clean Architecture'],
-        onDemoTap: () => {},
+        description: 'A full-featured Android application built with Kotlin and Jetpack Compose that replicates the core experience of TikTok.',
+        techStack: [
+          'Jetpack Compose',
+          'Kotlin',
+          'Koin',
+          'FastAPI',
+          'Firebase',
+          'ExoPlayer',
+          'CameraX',
+          'MVVM'
+        ],
+        onDemoTap: () => showDialog(
+          context: context,
+          builder: (context) => const DemoDialog(assetUrl: 'assets/tiktok_clone_demo.mp4'),
+        ),
         coverImagePath: 'assets/tiktok.png',
         isCover: false,
         subLinks: {

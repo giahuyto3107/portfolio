@@ -10,6 +10,8 @@ import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/core/widgets/project_container.dart';
 import 'package:portfolio/features/projects/data/models/project.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../utils/download_provider.dart';
+import 'package:pdfx/pdfx.dart';
 
 class AboutMeScreen extends StatelessWidget {
   const AboutMeScreen({super.key});
@@ -178,8 +180,122 @@ class _SelfDescriptionContainer extends StatelessWidget {
             textAlign: .justify,
           ),
           SizedBox(height: AppConstants.spacingM.h,),
-          const _SkillsWrap()
+          const _SkillsWrap(),
+          SizedBox(height: AppConstants.spacingL.h,),
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const _CvPreviewDialog(),
+                );
+              },
+              icon: const Icon(Icons.contact_page, color: Colors.white),
+              label: const Text('View CV', style: TextStyle(color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff1874e3),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppConstants.spacingM.w,
+                  vertical: AppConstants.spacingS.h,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppConstants.radiusM.r),
+                ),
+              ),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class _CvPreviewDialog extends StatefulWidget {
+  const _CvPreviewDialog();
+
+  @override
+  State<_CvPreviewDialog> createState() => _CvPreviewDialogState();
+}
+
+class _CvPreviewDialogState extends State<_CvPreviewDialog> {
+  late PdfControllerPinch pdfController;
+
+  @override
+  void initState() {
+    super.initState();
+    pdfController = PdfControllerPinch(
+      document: PdfDocument.openAsset('assets/cv.pdf'),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      insetPadding: const EdgeInsets.all(4),
+      backgroundColor: const Color(0xff1a2c45),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConstants.radiusL.r),
+      ),
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 8.0
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'CV',
+                    style: TextStyle(
+                      fontSize: getResponsiveFont(context, AppConstants.fontL),
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textOnDark,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(AppConstants.radiusS.r),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppConstants.radiusS.r),
+                  child: PdfViewPinch(
+                    controller: pdfController,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: AppConstants.spacingL.h),
+            ElevatedButton.icon(
+              onPressed: () {
+                downloadCV(); // This will automatically call the correct version
+              },
+              icon: const Icon(Icons.download, color: Colors.white),
+              label: const Text('Download CV', style: TextStyle(color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff1874e3),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppConstants.spacingL.w,
+                  vertical: AppConstants.spacingS.h,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

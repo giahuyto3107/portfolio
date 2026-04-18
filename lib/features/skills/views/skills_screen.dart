@@ -161,7 +161,11 @@ class _SkillContainer extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: AppConstants.spacingM.h,),
+          SizedBox(
+            height: Responsive.isDesktop(context)
+              ? getResponsiveHeight(context, AppConstants.spacingM.h)
+              : getResponsiveHeight(context, AppConstants.spacingXS.h),
+          ),
           Text(
             skill.label,
             style: TextStyle(
