@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    types: [ closed ] # Only trigger when the PR is actually merged/closed
+
+jobs:
+  build:
+    # Only run if it's a push to main OR a merged pull request
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          # Using cache helps the build run faster for future updates
+          cache: true
+
+      - run: flutter pub get
+
+      # Remember to change "/portfolio/" to your actual repo name
+      - run: flutter build web --release --base-href "/portfolio/"
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # This is a "magic" variable; GitHub handles it for you.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
