@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +8,14 @@ import 'package:portfolio/core/router/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ScreenUtil.ensureScreenSize();
+  ui.channelBuffers.resize('flutter/lifecycle', 100);
 
   runApp(
     ProviderScope(
       child: kReleaseMode
         ? const MyApp()
         : DevicePreview(
-          enabled: true,
+          enabled: !kReleaseMode,
           builder: (context) => const MyApp(),
         ),
     ),
@@ -32,7 +33,9 @@ class MyApp extends StatelessWidget {
         final screenWidth = MediaQuery.sizeOf(context).width;
         final screenHeight = MediaQuery.sizeOf(context).height;
 
-        final designSize = screenWidth >= 600
+        // Use a fixed design size if screen width is not yet available or small.
+        // Otherwise, adapt to the current screen size for desktop.
+        final designSize = (screenWidth >= 600)
             ? Size(screenWidth, screenHeight)
             : const Size(360, 690);
 

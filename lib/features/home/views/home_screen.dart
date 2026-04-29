@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,6 +32,10 @@ class _HomeContent extends StatelessWidget {
         children: [
           SizedBox(height: AppConstants.spacingS.h,),
           const _OwnerInformation(),
+          if (kIsWeb) ...[
+            SizedBox(height: AppConstants.spacingL.h),
+            const _DownloadApkBanner(),
+          ],
           SizedBox(height: AppConstants.spacingL.h,),
           const _SocialAccountsSection(),
       
@@ -66,14 +71,14 @@ class _OwnerInformation extends StatelessWidget {
         SizedBox(height: AppConstants.spacingXS.h,),
         _OwnerTitle(
           title: 'Tô Gia Huy',
-          size: getResponsiveFont(context, AppConstants.fontXXL),
+          size: getResponsiveFont(context, AppConstants.fontXXXL),
           weight: .w500,
           color: AppColors.textOnDark
         ),
 
         _OwnerTitle(
             title: 'Flutter Developer | Android Developer',
-            size: getResponsiveFont(context, AppConstants.fontM),
+            size: getResponsiveFont(context, AppConstants.fontL),
             weight: .w400,
             color: AppColors.secondaryText
         )
@@ -177,6 +182,65 @@ class _SocialAccountsSection extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _DownloadApkBanner extends StatelessWidget {
+  const _DownloadApkBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(AppConstants.spacingM.w),
+      decoration: BoxDecoration(
+        color: const Color(0xff1a2c45),
+        borderRadius: BorderRadius.circular(AppConstants.radiusL.r),
+        border: Border.all(color: const Color(0xff1874e3).withOpacity(0.5)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.android, color: Colors.greenAccent, size: 32),
+          SizedBox(width: AppConstants.spacingM.w),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Try the Android App",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: getResponsiveFont(context, AppConstants.fontM),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Download the APK for the best mobile experience.",
+                  style: TextStyle(
+                    color: AppColors.secondaryText,
+                    fontSize: getResponsiveFont(context, AppConstants.fontXS),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: AppConstants.spacingS.w),
+          ElevatedButton(
+            onPressed: () => launchUrl(
+              Uri.parse('assets/portfolio.apk'),
+              mode: LaunchMode.externalApplication,
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xff1874e3),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppConstants.radiusM.r),
+              ),
+            ),
+            child: const Text("Download", style: TextStyle(color: Colors.white)),
+          ),
+        ],
       ),
     );
   }
