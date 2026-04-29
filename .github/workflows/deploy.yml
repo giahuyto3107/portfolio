@@ -33,3 +33,4 @@ jobs:
           # This is a "magic" variable; GitHub handles it for you.
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
+          force_orphan: true
