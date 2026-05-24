@@ -50,10 +50,10 @@ class _FloatingImageState extends State<_FloatingImage> with TickerProviderState
   late final double radius;
 
   final List<IconData> icons = [
-    FontAwesomeIcons.database, Icons.phone_android, Icons.laptop,
-    Icons.code, FontAwesomeIcons.gitAlt, Icons.dns,
-    Icons.local_fire_department, FontAwesomeIcons.flutter, FontAwesomeIcons.android,
-    FontAwesomeIcons.python,
+    FontAwesomeIcons.database.data, Icons.phone_android, Icons.laptop,
+    Icons.code, FontAwesomeIcons.gitAlt.data, Icons.dns,
+    Icons.local_fire_department, FontAwesomeIcons.flutter.data, FontAwesomeIcons.android.data,
+    FontAwesomeIcons.python.data,
   ];
 
   @override

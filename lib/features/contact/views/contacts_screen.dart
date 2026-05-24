@@ -49,7 +49,7 @@ class _ContactsContent extends StatelessWidget {
       Contact(
         label: 'Linkedin',
         content: 'linkedin.com/in/togiahuy3107/',
-        icon: FontAwesomeIcons.linkedin,
+        icon: FontAwesomeIcons.linkedin.data,
         iconBgColor: Color(0xffc04bcb),
         bgColor: Color(0xff963fa5)
       ),

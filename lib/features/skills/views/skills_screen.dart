@@ -51,37 +51,37 @@ class _SkillsSection extends StatelessWidget {
     final List<Skill> skills = [
       Skill(
         percentage: 0.95,
-        icon: FontAwesomeIcons.flutter,
+        icon: FontAwesomeIcons.flutter.data,
         label: 'Flutter',
         color: Color(0xff4687f3),
       ),
       Skill(
         percentage: 0.80,
-        icon: FontAwesomeIcons.android,
+        icon: FontAwesomeIcons.android.data,
         label: 'Jetpack Compose',
         color: Color(0xff32a350),
       ),
       Skill(
         percentage: 0.82,
-        icon: FontAwesomeIcons.server,
+        icon: FontAwesomeIcons.server.data,
         label: 'Api',
         color: Color(0xff5c48b3),
       ),
       Skill(
         percentage: 0.85,
-        icon: FontAwesomeIcons.database,
+        icon: FontAwesomeIcons.database.data,
         label: 'Database',
         color: Color(0xff6fe9c0),
       ),
       Skill(
         percentage: 0.70,
-        icon: FontAwesomeIcons.fire,
+        icon: FontAwesomeIcons.fire.data,
         label: 'Firebase',
         color: Color(0xfffbb142),
       ),
       Skill(
         percentage: 0.90,
-        icon: FontAwesomeIcons.gitAlt,
+        icon: FontAwesomeIcons.gitAlt.data,
         label: 'Git',
         color: Color(0xfff9685c),
       ),

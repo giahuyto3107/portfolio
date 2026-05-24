@@ -55,7 +55,7 @@ class NavBar extends StatelessWidget {
                   onTap: onTap,
                 ),
                 _NavBarItem(
-                  icon: FontAwesomeIcons.briefcase,
+                  icon: FontAwesomeIcons.briefcase.data,
                   index: 2,
                   isSelected: currentIndex == 2,
                   onTap: onTap,
@@ -67,7 +67,7 @@ class NavBar extends StatelessWidget {
                   onTap: onTap,
                 ),
                 _NavBarItem(
-                  icon: FontAwesomeIcons.addressCard,
+                  icon: FontAwesomeIcons.addressCard.data,
                   index: 4,
                   isSelected: currentIndex == 4,
                   onTap: onTap,

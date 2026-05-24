@@ -120,7 +120,7 @@ class _SocialAccountsSection extends StatelessWidget {
   Widget build (BuildContext context) {
     final List<SocialAccount> socialAccounts = [
       SocialAccount(
-        icon: FontAwesomeIcons.github,
+        icon: FontAwesomeIcons.github.data,
         label: 'GitHub profile',
         urlLink: 'https://github.com/giahuyto3107'
       ),
@@ -130,17 +130,17 @@ class _SocialAccountsSection extends StatelessWidget {
         urlLink: 'https://www.facebook.com/giahuy3107',
       ),
       SocialAccount(
-        icon: FontAwesomeIcons.linkedin,
+        icon: FontAwesomeIcons.linkedin.data,
         label: 'LinkedIn profile',
         urlLink: 'https://www.linkedin.com/in/togiahuy3107/',
       ),
       SocialAccount(
-        icon: FontAwesomeIcons.instagram,
+        icon: FontAwesomeIcons.instagram.data,
         label: 'Instagram profile',
         urlLink: 'https://www.instagram.com/tgiahuy07_/',
       ),
       SocialAccount(
-        icon: FontAwesomeIcons.google,
+        icon: FontAwesomeIcons.google.data,
         label: 'Gmail address',
         urlLink: 'https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvrbrPVJtQZGXPkwbVhwkDFbNldTVlMtHhwlrHWFmVTbhxvQsTVKZDrLbkFbJKBmjspGjB',
       )

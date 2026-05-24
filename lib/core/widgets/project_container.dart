@@ -325,9 +325,9 @@ class _SubCodeLine extends StatelessWidget {
     String cleanLabel = label.toLowerCase();
 
     if (cleanLabel.contains('app store')) {
-      iconData = FontAwesomeIcons.appStoreIos;
+      iconData = FontAwesomeIcons.appStoreIos.data;
     } else if (cleanLabel.contains('google play')) {
-      iconData = FontAwesomeIcons.googlePlay;
+      iconData = FontAwesomeIcons.googlePlay.data;
     }
 
     return GestureDetector(
