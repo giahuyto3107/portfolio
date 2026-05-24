@@ -229,7 +229,7 @@ class _DownloadApkBanner extends StatelessWidget {
           SizedBox(width: AppConstants.spacingS.w),
           ElevatedButton(
             onPressed: () => launchUrl(
-              Uri.parse('https://github.com/giahuyto3107/portfolio/releases/download/v1.0.0/portfolio.apk'),
+              Uri.parse('https://github.com/giahuyto3107/portfolio/releases/download/v1.1.0/app-release.apk'),
               mode: LaunchMode.externalApplication,
             ),
             style: ElevatedButton.styleFrom(
