@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/core/constants/app_constants.dart';
-import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
 import 'package:portfolio/core/utils/responsive.dart';
 import 'package:portfolio/core/widgets/highlight_title.dart';
 import 'package:portfolio/core/widgets/main_wrapper.dart';
 import 'package:portfolio/features/contact/data/models/contact.dart';
-import 'package:portfolio/features/shells/providers/main_navigation_controller.dart';
 
 class ContactsScreen extends StatelessWidget {
   const ContactsScreen({super.key});
@@ -93,11 +90,6 @@ class _ContactsContent extends StatelessWidget {
             }
           ),
       
-          // SizedBox(height: AppConstants.spacingL.h,),
-          // const _SendMessageSection(),
-          // SizedBox(height: AppConstants.spacingM.h,),
-          // const _ViewMyWorkButton(),
-          // SizedBox(height: AppConstants.spacingXXL.h,),
           SizedBox(height: AppConstants.spacingNavigationBar.h,),
         ],
       ),
@@ -164,133 +156,4 @@ class _ContactMethodContainer extends StatelessWidget {
     );
   }
 }
-
-class _SendMessageSection extends StatelessWidget {
-  const _SendMessageSection();
-
-  @override
-  Widget build (BuildContext context) {
-    List<String> placeholders = [
-      'Name',
-      'Email',
-      'Phone',
-      'Message'
-    ];
-
-    return Column(
-      crossAxisAlignment: .start,
-      children: [
-        Text(
-          "Send a Message",
-          style: TextStyle(
-            color: AppColors.textOnDark,
-            fontSize: getResponsiveFont(context, AppConstants.fontM),
-            fontWeight: .w500
-          ),
-        ),
-        SizedBox(height: AppConstants.spacingM.h,),
-        ListView.separated(
-          shrinkWrap: true,
-          itemCount: placeholders.length,
-          physics: const NeverScrollableScrollPhysics(),
-          separatorBuilder: (context, index) {
-            return SizedBox(
-              height: AppConstants.spacingM.h,
-            );
-          },
-          itemBuilder: (context, index) {
-            final hint = placeholders[index];
-
-            return _FieldTextField(
-              hint: hint,
-              maxLines: hint == 'Message' ? 5 : 1,
-            );
-          }
-        ),
-      ],
-    );
-  }
-}
-
-class _FieldTextField extends StatelessWidget {
-  final String hint;
-  final int maxLines;
-
-  const _FieldTextField({
-    required this.hint,
-    this.maxLines = 1,
-  });
-
-  @override
-  Widget build (BuildContext context) {
-    return TextField(
-      maxLines: maxLines,
-      style: TextStyle(
-        color: AppColors.textOnDark,
-        fontSize: getResponsiveFont(context, AppConstants.fontS),
-      ),
-      decoration: InputDecoration(
-        hintText: hint,
-          hintStyle: TextStyle(
-            color: AppColors.secondaryText, // Or Colors.grey[400] if secondaryText is still too dark
-            fontSize: getResponsiveFont(context, AppConstants.fontM),
-          ),
-        fillColor: Color(0xff1e1d23),
-        filled: true,
-        contentPadding: EdgeInsets.all(AppConstants.spacingM.r),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppConstants.radiusM.r),
-          borderSide: BorderSide(
-            width: AppConstants.borderThin.w,
-            color: AppColors.secondaryText
-          )
-        )
-      ),
-
-    );
-  }
-}
-
-class _ViewMyWorkButton extends ConsumerWidget {
-  const _ViewMyWorkButton();
-
-  @override
-  Widget build (BuildContext context, WidgetRef ref) {
-
-    return GestureDetector(
-      onTap: () => ref.read(mainNavigationControllerProvider.notifier).setIndex(2),
-      child: Container(
-        width: 250.w,
-        decoration: BoxDecoration(
-          gradient: AppColors.horizontalGradientButton,
-          borderRadius: BorderRadius.circular(AppConstants.radiusCircular.r)
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: AppConstants.spacingXL.w,
-          vertical: AppConstants.spacingM.h,
-        ),
-        child: Row(
-          mainAxisAlignment: .center,
-          mainAxisSize: .min,
-          children: [
-            Icon(
-              Icons.arrow_forward,
-              color: AppColors.textOnDark,
-              size: getResponsiveFont(context, AppConstants.fontL),
-              weight: AppConstants.borderMedium,
-            ),
-            SizedBox(width: AppConstants.spacingS.w,),
-            Text(
-              AppStrings.viewMyWork,
-              style: TextStyle(
-                fontSize: getResponsiveFont(context, AppConstants.fontS),
-                fontWeight: .w500,
-                color: AppColors.textOnDark
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+

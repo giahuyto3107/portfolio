@@ -41,8 +41,9 @@ class _Content extends StatelessWidget {
           'UI/UX',
           'MVVM'
         ],
-        onCodeTap: () => {},
-        onDemoTap: () => {},
+        subLinks: {
+          "Google Play": "https://play.google.com/store/apps/details?id=lab.icip.lachanxanh"
+        },
         isCover: true,
         coverImagePath: 'assets/macro_shot.png',
       ),
@@ -62,7 +63,10 @@ class _Content extends StatelessWidget {
         ],
         onCodeTap: () =>
           launchUrl(Uri.parse('https://github.com/giahuyto3107/automatic_demonstration.git')),
-        onDemoTap: () => {}
+        onDemoTap: () => showDialog(
+          context: context,
+          builder: (context) => const DemoDialog(assetUrl: 'assets/auto_demonstration_demo.mp4'),
+        ),
       ),
       Project(
         title: 'Tiktok-clone',

@@ -198,7 +198,7 @@ class _DownloadApkBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xff1a2c45),
         borderRadius: BorderRadius.circular(AppConstants.radiusL.r),
-        border: Border.all(color: const Color(0xff1874e3).withOpacity(0.5)),
+        border: Border.all(color: const Color(0xff1874e3).withValues(alpha: 0.5)),
       ),
       child: Row(
         children: [

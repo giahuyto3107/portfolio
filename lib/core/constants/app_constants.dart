@@ -274,7 +274,7 @@ class AppConstants {
 
   static String backgroundImagePath = "assets/home_background.png";
 
-  static get fontBodyM => null;
+  static dynamic get fontBodyM => null;
 
 }
 
